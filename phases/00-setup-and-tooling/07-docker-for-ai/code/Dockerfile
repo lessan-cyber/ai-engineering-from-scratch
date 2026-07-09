@@ -1,29 +1,37 @@
 FROM nvidia/cuda:12.4.1-devel-ubuntu22.04
 
-ENV DEBIAN_FRONTEND=noninteractive
-ENV PYTHONUNBUFFERED=1
+# Prevent interactive prompts during apt installs
+ENV DEBIAN_FRONTEND=noninteractive \
+    PYTHONUNBUFFERED=1 \
+    UV_LINK_MODE=copy \
+    UV_COMPILE_BYTECODE=1 \
+    UV_PYTHON=3.12
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    python3.12 \
-    python3.12-venv \
-    python3.12-dev \
-    python3-pip \
+# Install minimal OS prerequisites
+RUN apt update && apt install -y --no-install-recommends \
     git \
-    curl \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.12 1
+# Copy uv binaries directly from the official Astral image
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
-RUN python -m pip install --no-cache-dir --upgrade pip setuptools wheel
+# Automatically download, install, and configure Python 3.12 globally via uv
+RUN uv python install 3.12 && uv venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
 
-RUN python -m pip install --no-cache-dir \
-    torch==2.3.1 \
-    torchvision==0.18.1 \
-    torchaudio==2.3.1 \
-    --index-url https://download.pytorch.org/whl/cu124
+WORKDIR /workspace
 
-RUN python -m pip install --no-cache-dir \
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv pip install --torch-backend=cu124 \
+    torch==2.4.0 \
+    torchvision==0.19\
+    torchaudio==2.4.0
+
+
+# Install data science and ML toolkit
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv pip install \
     numpy \
     pandas \
     scikit-learn \
@@ -33,8 +41,6 @@ RUN python -m pip install --no-cache-dir \
     datasets \
     accelerate \
     safetensors
-
-WORKDIR /workspace
 
 VOLUME ["/workspace", "/models"]
 
