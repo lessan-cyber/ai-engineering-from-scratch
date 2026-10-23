@@ -1,6 +1,6 @@
 # LLaVA e sintonização de instruções visuais
 
-> LLaVA (abril de 2023) é a arquitetura multimodal mais copiada do planeta. Substituiu o Q-Former do BLIP-2 com um MLP de 2 camadas, substituiu a atenção cruzada fechada do Flamingo com concatenamento de token ingênuo e treinou em 158k viradas de instrução visual geradas pelo GPT-4 a partir de legendas apenas de texto. Qualquer praticante que construiu um VLM entre 2023 e 2026 construiu alguma variante do LLaVA. LLaVA-1.5 adicionou AnyRes. A resolução do LVA-NEXT aumentou. LLaVA-OneVision imagem unificada, multi-imagem e vídeo em uma receita. Esta lição lê a receita, implementa o projetor e explica por que "o mais simples venceu".
+> LLaVA (abril de 2023) é a arquitetura multimodal mais copiada do planeta. Substituiu o Q-Former do BLIP-2 com um MLP de 2 camadas, substituiu a atenção cruzada fechada do Flamingo com concatenamento de token ingênuo e treinou em 158k viradas de instrução visual geradas pelo GPT-4 a partir de legendas apenas de texto. Qualquer praticante que construiu um VLM entre 2023 e 2026 construiu alguma variante do LLaVA. LLaVA-1.5 trocado em um projetor MLP e um codificador 336px. LLaVA-NeXT adicionou azulejos AnyRes para entrada de alta resolução. LLaVA-OneVision imagem unificada, multi-imagem e vídeo em uma receita. Esta lição lê a receita, implementa o projetor e explica por que "o mais simples venceu".
 
 **Type:** Build
 **Languages:** Python (stdlib, projector + instruction-template builder)
@@ -32,10 +32,10 @@ O resultado: um VLM que correu em 8 A100s por um dia, venceu Flamingo no MMMU, e
 
 ### A arquitetura
 
-LLaVA-1.5 em 13B:
+LLaVA-1.5 em 7B:
 - Encoder de visão: CLIP ViT-L/14 @ 336 (congelado durante a fase 1, opcionalmente descongelado na fase 2).
 - Projector: MLP de 2 camadas com ativação GELU, `1024 → 4096 → 4096`- Não .
-- LLM: Vicuna-13B (mais tarde Llama-3.1-8B).
+- LLM: Vicuna-7B v1.5 (uma variante 13B usa Vicuna-13B; mais tarde as garfos foram transferidas para Llama-3.1-8B).
 
 Passe para a frente uma imagem + texto de solicitação:
 
@@ -83,7 +83,8 @@ Nada disso toca diretamente à imagem  apenas a descrição do texto. GPT-4 aluc
 LLaVA-1.5 (outubro de 2023) acrescentou:
 - Dados académicos (VQA, OKVQA, RefCOCO) misturados para a sintonização das instruções.
 - Melhor sistema de urgência.
-- 2048 → 32k contexto.
+- Um projeto MLP de 2 camadas em vez da camada linear original, e CLIP ViT-L/14 em 336px (576 tokens) em vez de 224px (256 tokens).
+- Uma variante HD que divide a grade no jornal, que LLaVA-NeXT enviou mais tarde como AnyRes.
 
 LLaVA-NeXT ( janeiro de 2024) acrescentou:
 - AnyRes: dividir imagens de alta resolução em uma grade de 2x2 ou 1x3 de 336x336 culturas, mais uma miniatura global de baixa resolução. Cada cultura se torna 576 tokens; total de cerca de 2880 tokens visuais por imagem.
@@ -99,7 +100,7 @@ A lição 12.08 abrange OneVision em profundidade. versão curta: o mesmo projet
 | | Q-Former (BLIP-2) | MLP (LLaVA) |
 |---|---|---|
 | Visual tokens per image | 32 | 576 (base) or 2880 (AnyRes) |
-| Trainable params | 188M + LM | 40M + LM |
+| Trainable params | 188M + LM | ~22M (7B) + LM |
 | Stage 1 loss | ITC+ITM+ITG | LM only |
 | LLM drop-in | Requires retrain | Swap with minimal retrain |
 | Multi-image | Awkward | Natural (concat) |
