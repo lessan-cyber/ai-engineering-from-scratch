@@ -77,7 +77,7 @@ Si su pila requiere de redistribuir para volver a rodar, arregle eso antes de ro
 
 ### Cadencia de las métricas
 
-Las puertas canarias revisan cada 5-15 minutos dependiendo del volumen de tráfico. El 1% del tráfico con 10 req/min da 50-150 puntos de datos por ventana  suficiente para la latencia pero ruidoso para la retroalimentación del usuario. El 10% da ~10x más.
+Las puertas de Canary se revisan cada 5-15 minutos dependiendo del volumen de tráfico. 1% de 1,000 req/min (10 req/min para el canario) da 50-150 puntos de datos por ventana de 5-15 minutos  suficiente para la latencia pero ruidoso para la retroalimentación del usuario. 10% da ~10x más.
 
 ### El paso A/B es opcional.
 

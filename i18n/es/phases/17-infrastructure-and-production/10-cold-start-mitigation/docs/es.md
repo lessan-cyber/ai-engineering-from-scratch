@@ -1,6 +1,6 @@
 # Mitigación de los comienzos en frío para los LLM sin servidor
 
-> Una imagen de modelo de 20 GB tarda 5-10 minutos (7B) a 20+ minutos (70B) en pasar de frío a servicio. En un mundo sin servidores, eso no es un calentamiento, es un apagón. Las mitigaciones operan en cinco capas: imágenes de nodos pre-seeded (Bottlerocket en AWS, arco de doble volumen), transmisión de modelos (NVIDIA Run:ai Model Streamer, nativo en vLLM), instantáneas de memoria de GPU (puntos de control módiles, hasta 10 veces más rápido reinicio), piscinas calientes (`min_workers=1`), carga en niveles (NVMe→DRAM→HBM de ServerlessLLM, reducción de latencia 10-200x), y migración en vivo que mueve tokens de entrada (KB) en lugar de KV caché (GB). Modal publica 2-4s de frío comienzos como piso; Baseten 5-10s por defecto, subsegundo con pre-calentamiento. Esta lección te enseña a medir, presupuestar y apilar las cinco capas.
+> Un modelo grande tarda minutos en pasar de frío a servicio: un modelo 70B en un nodo fresco necesita aproximadamente 3-8 minutos antes del primer token. En un mundo sin servidores, eso no es un calentamiento, es un apagón. Las mitigaciones operan en cinco capas: imágenes de nodos pre-seeded (Bottlerocket en AWS, arco de doble volumen), transmisión de modelos (NVIDIA Run:ai Model Streamer, nativo en vLLM), instantáneas de memoria de GPU (puntos de control módiles, hasta 10 veces más rápido reinicio), piscinas calientes (`min_workers=1`), carga en niveles (NVMe→DRAM→HBM de ServerlessLLM, reducción de latencia 10-200x), más un patrón sexto de bonificación, migración en vivo que mueve tokens de entrada (KB) en lugar de KV caché (GB).
 
 **Type:** Learn
 **Languages:** Python (stdlib, toy cold-start path simulator)
@@ -125,6 +125,6 @@ Esta lección produce`outputs/skill-cold-start-planner.md`. Dado el SLA, el tama
 - [Modal — Cold start performance](https://modal.com/docs/guide/cold-start) Los puntos de referencia publicados de Modal y la arquitectura de los puntos de control.
 - [AWS Bottlerocket](https://github.com/bottlerocket-os/bottlerocket) Modelo de instantánea de volumen de datos pre-seeded.
 - [NVIDIA Run:ai Model Streamer](https://github.com/run-ai/runai-model-streamer) Peso sobrepeso carga con configuración de cálculo.
-- [Baseten — Cold-start mitigation](https://www.baseten.co/blog/cold-start-mitigation/) Manual de juego de precalentamiento.
+- [Baseten — Cold starts](https://docs.baseten.co/deployment/autoscaling/cold-starts) Manual de juego de precalentamiento.
 - [ServerlessLLM paper (USENIX OSDI'24)](https://www.usenix.org/conference/osdi24/presentation/fu) Diseño de carga en niveles.
 - [NVIDIA — Disaggregated LLM Inference on Kubernetes](https://developer.nvidia.com/blog/deploying-disaggregated-llm-inference-workloads-on-kubernetes/) migración en vivo para desplegamientos desglosados.
