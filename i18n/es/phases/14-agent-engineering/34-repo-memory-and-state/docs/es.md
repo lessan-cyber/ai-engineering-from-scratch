@@ -95,7 +95,7 @@ Cuatro patrones convierten el mínimo de la lección en algo que un monorepo mul
 
 **Separate large artifacts from state.**No almacenes CSV, transcripciones largas o archivos generados en `agent_state.json`. Guarde el artefacto como un archivo separado (o cargue al almacenamiento de objetos) y mantenga solo el camino en estado. Los puntos de control se mantienen pequeños y rápidos; los artefactos crecen de forma independiente.
 
-**Event sourcing for audit, snapshots for resume.**Aplicar a un registro de eventos (`state.events.jsonl`) en cada mutación; de forma periódica, una instantánea de `state.json`Resume lee el instantáneo, luego reproduce cualquier evento después de la timestamp de la instantánea. Esto cuesta más disco pero le permite reproducir las decisiones del agente literalmente  esencial cuando se deparan ejecuciones de horizonte largo. La misma forma que utiliza Postgres internamente para WAL.
+**Event sourcing for audit, snapshots for resume.**Aplicar a un registro de eventos (`state.events.jsonl`) en cada mutación; de forma periódica, una instantánea de `state.json`Resume lee la instantánea, luego reproduce cualquier evento después de la timestamp de la instantánea. Esto cuesta más disco pero le permite reproducir las decisiones del agente literalmente  esencial cuando se deparan las ejecuciones de largo horizonte. Postgres utiliza la misma idea de registro más punto de control en la capa de almacenamiento con su WAL, aunque a un nivel mucho menor que los eventos de aplicación.
 
 **Schema migrations or refuse to load.**El `schema_version`Cuando el administrador carga un archivo en una versión desconocida, se niega a leer. Envía un script de migración junto al golpe de esquema; `tools/migrate_state.py`funciona de forma idempotente en cada startup.
 
@@ -133,7 +133,7 @@ En producción:
 
 - [JSON Schema specification](https://json-schema.org/specification.html)
 - [LangGraph checkpointers](https://langchain-ai.github.io/langgraph/concepts/persistence/)
-- [Letta memory blocks](https://docs.letta.com/concepts/memory)
+- [Letta memory blocks](https://docs.letta.com/v1-sdk/memory/memory-blocks)
 - [Fast.io, AI Agent State Checkpointing: A Practical Guide](https://fast.io/resources/ai-agent-state-checkpointing/) Control de esquemas con idempotencia
 - [Fast.io, AI Agent Workflow State Persistence: Best Practices 2026](https://fast.io/resources/ai-agent-workflow-state-persistence/) control de concurrencia, TTL, abastecimiento de eventos
 - [Hive Issue #6263 — non-atomic state.json writes silently ignored](https://github.com/aden-hive/hive/issues/6263) el modo de fallo en un proyecto real
