@@ -45,7 +45,7 @@ Chaque tâche audio a plusieurs mesures, chacune mesurant un axe différent. En 
 
 **SECS (Speaker Encoder Cosine Similarity).**Pour le clonage vocal. ECAPA intégrant cosine entre référence et sortie clonée. &gt; 0,75 = clone reconnaissable.
 
-**WER-on-ASR-round-trip.**Exécutez Whisper sur la sortie TTS, calculer WER contre le texte d'entrée. Capture des régressions d'intelligibilité. 2026 SOTA: &lt; 2% CER.
+**WER-on-ASR-round-trip.**Exécutez Whisper sur la sortie TTS, calculer WER contre le texte d'entrée. Capture des régressions d'intelligibilité. 2026 SOTA: &lt; 2% WER sur les ensembles de test anglais (les ensembles mandarin rapportent le CER à la place).
 
 **TTFA (time-to-first-audio).**La latence de l'horloge murale Kokoro-82M: ~100 ms; F5-TTS: ~1 seconde.
 
@@ -79,7 +79,7 @@ Exclusifs pour plusieurs classes: **top-1, top-5 accuracy**- Commande de parole 
 
 **CLAP Score.**Score d'alignement texte-audio en utilisant des emblèmes CLAP. &gt; 0,3 = alignement raisonnable.
 
-**Listening panel MOS.**Le dernier mot pour la musique de consommation.
+**Listening panel MOS.**Le dernier mot pour la musique de consommation. Suno v5 a obtenu un score ELO 1293 sur le propre benchmark de préférence parée de Suno. C'est un numéro de fournisseur; TTS Arena classe la parole, pas la musique.
 
 ### Indices de référence pour le langage audio
 
@@ -106,7 +106,7 @@ Exclusifs pour plusieurs classes: **top-1, top-5 accuracy**- Commande de parole 
 | Open ASR Leaderboard (HF) | English + multilingual + long-form | `huggingface.co/spaces/hf-audio/open_asr_leaderboard` |
 | TTS Arena (HF) | English TTS | `huggingface.co/spaces/TTS-AGI/TTS-Arena` |
 | Artificial Analysis Speech | TTS + STT, ELO from paired votes | `artificialanalysis.ai/speech` |
-| MMAU-Pro | LALM reasoning | `mmaubenchmark.github.io` |
+| MMAU-Pro | LALM reasoning | `sonalkum.github.io/mmau-pro` |
 | SpeakerBench / VoxSRC | Speaker recognition | `voxsrc.github.io` |
 | MMAU music subset | Music LALM | (within MMAU) |
 | HEAR benchmark | Self-supervised audio | `hearbenchmark.com` |
@@ -224,5 +224,5 @@ Parler chaque déploiement avec un harnais d'évaluation fixe qui fonctionne sur
 - [Fréchet Audio Distance (Kilgour et al. 2019)](https://arxiv.org/abs/1812.08466) la norme de la génération musicale.
 - [Open ASR Leaderboard](https://huggingface.co/spaces/hf-audio/open_asr_leaderboard) 2026 classement en direct.
 - [TTS Arena](https://huggingface.co/spaces/TTS-AGI/TTS-Arena) Le classement des TTS par vote humain.
-- [MMAU-Pro benchmark](https://mmaubenchmark.github.io/) Tableau de classement de raisonnement LALM.
+- [MMAU-Pro benchmark](https://sonalkum.github.io/mmau-pro/) Tableau de classement de raisonnement LALM.
 - [HEAR benchmark](https://hearbenchmark.com/) les références SSL audio.
