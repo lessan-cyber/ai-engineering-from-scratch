@@ -124,7 +124,7 @@ O que se pode dizer é que os modelos absorvem os truques de arremesso ao longo 
 
 É a parte em que não precisas de ser educado.
 
-- A anatomia de um agente de uso da LangChain enumera onze componentes: - pedidos, ferramentas, ganchos, caixas de areia, orquestração, memória, habilidades, subagentes e um "bucle estúpido" de execução.
+- A *Anatomia de um Agente Harness* da LangChain percorre os componentes principais do harness: pedidos, ferramentas, ganchos, sandboxes, orquestração, memória, habilidades, subagentes e um "loop estúpido" de tempo de execução. Trata o arnes como um objeto que você configura, não como um sistema que você implanta.
 - A Engenharia de Arneses de Addy Osmani faz a enquadramento.`Agent = Model + Harness`E o padrão de ratchet, mas não diz do que é feito um arame.
 - O Antropic e o OpenAI vão mais fundo nas superfícies, mas permanecem dentro de seus próprios tempos de execução. O anúncio de "separação de arneses-computação" no Agents SDK de abril de 2026 é a primeira peça do fornecedor que endossa explícitamente a divisão controle-plano / plano de dados. Essa é uma ideia primitiva, não uma nova.
 - O livro agentic_harness trata o arnes como um objeto de configuração (Jaymin West *Agentic Engineering*, capítulo 6) e a linha mais forte nele é "o arnes é o limite de segurança primário em um sistema agente". Isso é apenas política de autorização, reafirmado.
@@ -193,7 +193,7 @@ Leia estes como pontos de dados, não como autoridades. Cada um é uma taxonomia
 Enquadros do fornecedor:
 
 - [Addy Osmani, Agent Harness Engineering](https://addyosmani.com/blog/agent-harness-engineering/)- Não .`Agent = Model + Harness`e o padrão de ratchet; fino na infraestrutura
-- [LangChain, The Anatomy of an Agent Harness](https://blog.langchain.com/the-anatomy-of-an-agent-harness/) onze componentes: pedidos, ferramentas, ganchos, orquestração, caixas de areia, memória, habilidades, sub-gêneros, tempo de execução; omite filas, implantação, authz
+- [LangChain, The Anatomy of an Agent Harness](https://blog.langchain.com/the-anatomy-of-an-agent-harness/) componentes do arsenal central: pedidos, ferramentas, ganchos, orquestração, caixas de areia, memória, habilidades, subagentes, tempo de execução; omite filas, implantação, authz
 - [OpenAI, Harness engineering: leveraging Codex in an agent-first world](https://openai.com/index/harness-engineering/) A visão da equipe do Codex das superfícies em torno de seu tempo de execução
 - [OpenAI, Unrolling the Codex agent loop](https://openai.com/index/unrolling-the-codex-agent-loop/) o ciclo do agente reduzido a `while`sobre chamadas de função
 - [Anthropic, Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) superfícies de longo horizonte dentro de um tempo de execução específico
@@ -214,7 +214,6 @@ Livros, artigos e implementações de referência:
 - [preprints.org, Harness Engineering for Language Agents (March 2026)](https://www.preprints.org/manuscript/202603.1756) enquadramento acadêmico como controlo / agência / tempo de execução
 - [walkinglabs/awesome-harness-engineering](https://github.com/walkinglabs/awesome-harness-engineering) Lista de leitura curada em todo o contexto, avaliação, observabilidade, orquestração
 - [ai-boost/awesome-harness-engineering](https://github.com/ai-boost/awesome-harness-engineering) lista de seleção alternativa (ferramentas, avaliações, memória, MCP, permissões)
-- [andrewgarst/agentic_harness](https://github.com/andrewgarst/agentic_harness) implementação de referência pronta para produção com suíte de memória e avaliação com apoio da Redis
 - [HKUDS/OpenHarness](https://github.com/HKUDS/OpenHarness) Arnes de agente aberto com agente pessoal incorporado
 
 Os fios de Hacker News vale a pena ler para os desentendimentos, não para o consenso:

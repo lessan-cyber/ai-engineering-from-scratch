@@ -95,7 +95,7 @@ Quatro padrões transformam o mínimo da lição em algo que um monorepo multi-a
 
 **Separate large artifacts from state.**Não armazenar CSVs, transcrições longas, ou arquivos gerados em `agent_state.json`. Salvar o artefato como um arquivo separado (ou fazer upload para armazenamento de objetos) e manter apenas o caminho em estado.
 
-**Event sourcing for audit, snapshots for resume.**Aplicar a um registro de eventos (`state.events.jsonl`) em cada mutação; periodicamente , um instantâneo de `state.json`Resume lê o snapshot, e depois reproduz todos os eventos após o timestamp do snapshot. Isso custa mais disco, mas permite que você reproduzir as decisões do agente, literalmente, essencial quando se depura corridas de longo horizonte. A mesma forma que o Postgres usa internamente para WAL.
+**Event sourcing for audit, snapshots for resume.**Aplicar a um registro de eventos (`state.events.jsonl`) em cada mutação; periodicamente , um instantâneo de `state.json`Resume lê o snapshot, em seguida, reproduza qualquer evento após o timestamp do snapshot. Isso custa mais disco, mas permite que você reproduzir as decisões do agente, literalmente, essencial ao depurar corridas de longo horizonte. Postgres usa a mesma ideia de log mais checkpoint na camada de armazenamento com seu WAL, embora em um nível muito menor que os eventos de aplicação.
 
 **Schema migrations or refuse to load.**O `schema_version`Quando o gerente carrega um arquivo em uma versão desconhecida, ele se recusa a ler. Envie um script de migração ao lado do schema bump; `tools/migrate_state.py`funciona de forma idempotente em todas as startups.
 
@@ -133,7 +133,7 @@ Em produção:
 
 - [JSON Schema specification](https://json-schema.org/specification.html)
 - [LangGraph checkpointers](https://langchain-ai.github.io/langgraph/concepts/persistence/)
-- [Letta memory blocks](https://docs.letta.com/concepts/memory)
+- [Letta memory blocks](https://docs.letta.com/v1-sdk/memory/memory-blocks)
 - [Fast.io, AI Agent State Checkpointing: A Practical Guide](https://fast.io/resources/ai-agent-state-checkpointing/) Primeiro ponto de controlo com idempotencia
 - [Fast.io, AI Agent Workflow State Persistence: Best Practices 2026](https://fast.io/resources/ai-agent-workflow-state-persistence/) Controle de concurência, TTL, aquisição de eventos
 - [Hive Issue #6263 — non-atomic state.json writes silently ignored](https://github.com/aden-hive/hive/issues/6263) o modo de falha num projecto real

@@ -87,7 +87,7 @@ Resultado: três relatórios de veredicto, cada um guardado ao lado do roteiro.
 
 ## Padrões de produção em silêncio
 
-Quatro padrões elevam o portão de "outro trabalho de linho" para "a borda decisiva".
+Cinco padrões elevam o portão de "outro trabalho de linho" para "a borda decisiva".
 
 **Defense-in-depth, not single gate.**O gancho pré-comit → verificação do estado do CI → gancho pré-ferramenta authz → gate pré-merger. Cada camada é determinista, de modo que uma falha em uma camada é capturada pela próxima. o manual de jogo de março de 2026 da microservices.io é explícito: o gancho pré-comit é impossível de passar porque, ao contrário de uma habilidade do lado do modelo, não depende do agente que segue instruções.
 
@@ -140,7 +140,6 @@ O portão é a borda decisiva no fluxo do banco de trabalho.
 - [Type-Checked Compliance: Deterministic Guardrails (arXiv 2604.01483)](https://arxiv.org/pdf/2604.01483) Lean 4 como limite superior da abertura determinista
 - [logi-cmd/agent-guardrails — merge gate spec](https://github.com/logi-cmd/agent-guardrails) Ámbito de aplicação + portas de teste de mutação
 - [Guardrails AI x MLflow](https://guardrailsai.com/blog/guardrails-mlflow) Validadores deterministas como marcadores de CI
-- [Akira, Real-Time Guardrails for Agentic Systems](https://www.akira.ai/blog/real-time-guardrails-agentic-systems) Portas pré/pós-ferramentas
 - Fase 14 · 27  Defesa de injecção rápida (par adversária do portal)
 - Fase 14 · 36  o contrato de âmbito que esta porta aplica
 - Fase 14 · 37  o registro de feedback este portal pontua
