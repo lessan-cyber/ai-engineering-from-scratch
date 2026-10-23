@@ -46,7 +46,7 @@
 
 ### 破产平衡计算
 
-为了节省净资金,预存区块必须至少读到两次. 1 写 + 1 读平均每次请求成本 0.675x (节省 32%); 1 写 + 10 读平均 0.205x (节省 80%). 指规则:预计在 TTL 中至少 3 次重复使用任何预存.
+由于缓存阅读成本为0.1倍,因此Anthropic的25%的写费 (5分钟的TTL) 在第一次阅读时支付了自己. 1 写 + 1 读平均每次请求的成本 0.675x (节省 32%); 1 写 + 10 读平均 0.205x (节省 80%). 写作需要两个读数才能得到前面. 基本规则:在TLT内预计至少3次重复使用的任何东西,
 
 ```figure
 prompt-cache-hit
@@ -141,7 +141,7 @@ from google.genai import types
 client = genai.Client()
 
 cache = client.caches.create(
-    model="gemini-3-pro",
+    model="gemini-3.8-flash",
     config=types.CreateCachedContentConfig(
         display_name="rubric-v3",
         system_instruction=RUBRIC,
@@ -151,7 +151,7 @@ cache = client.caches.create(
 )
 
 resp = client.models.generate_content(
-    model="gemini-3-pro",
+    model="gemini-3.8-flash",
     contents=["Review this code:\n" + code],
     config=types.GenerateContentConfig(cached_content=cache.name),
 )
