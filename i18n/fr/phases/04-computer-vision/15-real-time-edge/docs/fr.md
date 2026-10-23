@@ -1,6 +1,6 @@
 # Vue en temps réel  Déploiement de bord
 
-> L'inférence de bord est la discipline consistant à faire fonctionner un modèle de 90 degrés de précision à 30 fps sur un appareil avec 2 Go de RAM.
+> L'inférence de bord est la discipline consistant à faire fonctionner un modèle à 90% de précision à 30 fps sur un appareil avec 2 Go de RAM.
 
 **Type:** Learn + Build
 **Languages:** Python
@@ -41,7 +41,7 @@ flowchart LR
     style PWR fill:#dbeafe,stroke:#2563eb
 ```
 
-- **Latency**La moyenne de seulement p50 cache le comportement de la queue qui compte pour les systèmes en temps réel.
+- **Latency**: p50, p95, p99. En signallant seulement p50 (ou la moyenne), on cache un comportement de queue qui est important pour les systèmes en temps réel.
 - **Peak memory**Le nombre de détecteurs de données est le maximum que le dispositif peut voir, pas la moyenne en état d'arrêt.
 - **Power / energy**Le nombre de périphériques de traitement de la CPU/GPU est souvent calculé par temps d'utilisation.
 
@@ -270,5 +270,5 @@ Cette leçon donne:
 
 - [EfficientNet (Tan & Le, 2019)](https://arxiv.org/abs/1905.11946) Écalement composé pour des architectures efficaces
 - [MobileNetV3 (Howard et al., 2019)](https://arxiv.org/abs/1905.02244) architecture mobile-first avec h-swish et squeeze-excite
-- [A Practical Guide to TensorRT Optimization (NVIDIA)](https://developer.nvidia.com/blog/accelerating-model-inference-with-tensorrt-tips-and-best-practices-for-pytorch-users/) comment obtenir réellement les chiffres de débit dans le papier
+- [Accelerating Inference Up to 6x Faster in PyTorch with Torch-TensorRT (NVIDIA)](https://developer.nvidia.com/blog/accelerating-inference-up-to-6x-faster-in-pytorch-with-torch-tensorrt/) comment obtenir réellement les chiffres de débit dans le papier
 - [ONNX Runtime docs](https://onnxruntime.ai/docs/) quantification, optimisation des graphiques, sélection des fournisseurs
