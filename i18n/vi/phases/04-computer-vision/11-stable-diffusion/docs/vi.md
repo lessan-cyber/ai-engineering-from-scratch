@@ -55,8 +55,8 @@ flowchart LR
 
 Điều kiện văn bản đơn học `epsilon_theta(x_t, t, c)`cho mỗi lần gọi `c`CFG đào tạo cùng một mạng với `c`giảm 10% thời gian (được thay thế bằng một nhúng trống), đưa ra một mô hình duy nhất dự đoán cả tiếng ồn có điều kiện và không điều kiện.
 
-```
-eps = eps_uncond + w * (eps_cond - eps_uncond)
+```math
+\epsilon = \epsilon_{\text{uncond}} + w \cdot (\epsilon_{\text{cond}} - \epsilon_{\text{uncond}})
 ```
 
 `w`là thang đo hướng dẫn. `w=0`là không có điều kiện,`w=1`là hoàn toàn có điều kiện,`w>1`đẩy đầu ra hướng tới "còn điều kiện hơn trên prompt" với chi phí của sự đa dạng.`w=7.5`- Tôi không biết.
@@ -193,13 +193,16 @@ Các pixel trắng trong mặt nạ là khu vực để tái tạo.
 ### Bước 5: LoRA
 
 ```python
-pipe.load_lora_weights("sayakpaul/sd-lora-ghibli")
+pipe.load_lora_weights(
+    "artificialguybr/studioghibli-redmond-1-5v-studio-ghibli-lora-for-liberteredmond-sd-1-5",
+    weight_name="StudioGhibliRedmond-15V-LiberteRedmond-StdGBRedmAF-StudioGhibli.safetensors",
+)
 pipe.fuse_lora(lora_scale=0.8)
 
-image = pipe(prompt="a village square in ghibli style").images[0]
+image = pipe(prompt="a village square, StdGBRedmAF, Studio Ghibli").images[0]
 ```
 
-`lora_scale`kiểm soát sức mạnh; 0,0 = không có hiệu ứng, 1,0 = hiệu ứng đầy đủ. `fuse_lora`làm cho bộ điều chỉnh nạp vào trọng lượng để tăng tốc, nhưng ngăn chặn sự thay đổi.`pipe.unfuse_lora()`trước khi tải một bộ chuyển đổi khác.
+Câu khởi động từ thẻ mô hình (`StdGBRedmAF, Studio Ghibli`) bật phong cách. `lora_scale`kiểm soát sức mạnh; 0,0 = không có hiệu ứng, 1,0 = hiệu ứng đầy đủ. `fuse_lora`làm cho bộ điều chỉnh nạp vào trọng lượng để tăng tốc, nhưng ngăn chặn sự thay đổi.`pipe.unfuse_lora()`trước khi tải một bộ chuyển đổi khác.
 
 ### Bước 6: đào tạo LoRA (phác thảo)
 
@@ -232,7 +235,7 @@ Trong sản xuất, những quyết định mà bạn thực sự đưa ra:
 
 - **Model family**: SD 1.5 cho các bản nhạc cộng đồng nguồn mở, SDXL cho độ trung thực cao hơn, SD3 / FLUX cho trạng thái hiện đại và các yêu cầu cấp phép nghiêm ngặt.
 - **Scheduler**: DPM-Solver++ 2M Karras cho 20-30 bước, LCM-LoRA khi độ trễ dưới 1s.
-- **Precision**`float16`trên 4080/4090, `bfloat16`trên A100 và mới hơn, `int8`(via `bitsandbytes`hoặc `compel`) khi VRAM bị chặt chẽ.
+- **Precision**`float16`trên 4080/4090, `bfloat16`trên A100 và mới hơn, `int8`(via `bitsandbytes`) khi VRAM bị chặt chẽ.
 - **Conditioning**: văn bản đơn giản hoạt động; để kiểm soát mạnh hơn, thêm ControlNet (có thể, độ sâu, tư thế) trên đầu của đường ống cơ sở.
 
 Đối với thế hệ hàng loạt, `AUTO1111`- `ComfyUI`là các công cụ của cộng đồng; cho các API sản xuất,`diffusers`+ `accelerate`hoặc `optimum-nvidia`với TensorRT compilation.

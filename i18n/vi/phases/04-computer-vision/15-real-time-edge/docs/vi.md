@@ -1,6 +1,6 @@
 # Khán giả thời gian thực  Lập khẩu cạnh
 
-> Kết luận cạnh là kỷ luật để có được một mô hình 90 độ chính xác chạy với tốc độ 30 fps trên một thiết bị có 2 GB RAM.
+> Kết luận cạnh là kỷ luật để có được một mô hình 90% chính xác chạy với tốc độ 30 fps trên một thiết bị có 2 GB RAM.
 
 **Type:** Learn + Build
 **Languages:** Python
@@ -41,7 +41,7 @@ flowchart LR
     style PWR fill:#dbeafe,stroke:#2563eb
 ```
 
-- **Latency**: p50, p95, p99. Chỉ trung bình p50 che giấu hành vi đuôi quan trọng cho hệ thống thời gian thực.
+- **Latency**: p50, p95, p99. báo cáo chỉ p50 (hoặc trung bình) che giấu hành vi đuôi quan trọng cho các hệ thống thời gian thực.
 - **Peak memory**: mức tối đa mà thiết bị nhìn thấy, không phải là mức trung bình ổn định.
 - **Power / energy**: hàng triệu giọt mỗi suy luận trên một thiết bị chạy pin.
 
@@ -270,5 +270,5 @@ Bài học này mang lại:
 
 - [EfficientNet (Tan & Le, 2019)](https://arxiv.org/abs/1905.11946) quy mô hợp chất cho các kiến trúc hiệu quả
 - [MobileNetV3 (Howard et al., 2019)](https://arxiv.org/abs/1905.02244) kiến trúc di động đầu tiên với h-swish và squeeze-excite
-- [A Practical Guide to TensorRT Optimization (NVIDIA)](https://developer.nvidia.com/blog/accelerating-model-inference-with-tensorrt-tips-and-best-practices-for-pytorch-users/) làm thế nào để thực sự có được các số thông qua trong giấy
+- [Accelerating Inference Up to 6x Faster in PyTorch with Torch-TensorRT (NVIDIA)](https://developer.nvidia.com/blog/accelerating-inference-up-to-6x-faster-in-pytorch-with-torch-tensorrt/) làm thế nào để thực sự có được các số thông qua trong giấy
 - [ONNX Runtime docs](https://onnxruntime.ai/docs/) định lượng, tối ưu hóa biểu đồ, lựa chọn nhà cung cấp
