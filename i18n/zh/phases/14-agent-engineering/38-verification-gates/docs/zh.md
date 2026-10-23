@@ -87,7 +87,7 @@ python3 code/main.py
 
 ## 野生生产模式
 
-现在,我们已经开始了四个模式,
+五种模式将门从"另一个子工作"升至"决定性边缘".
 
 **Defense-in-depth, not single gate.**预约 → CI状态检查 →预工具 authz →预合组门.每个层都是确定性的,因此一个层中的故障被下一个层捕获.microservices.io的2026年3月的游戏簿明确:预约是不可绕过的,因为与模型侧技能不同,它不依赖于遵循指令的代理.验证门位于CI / pre-merge层.
 
@@ -140,7 +140,6 @@ python3 code/main.py
 - [Type-Checked Compliance: Deterministic Guardrails (arXiv 2604.01483)](https://arxiv.org/pdf/2604.01483)4作为确定性盖特的上限
 - [logi-cmd/agent-guardrails — merge gate spec](https://github.com/logi-cmd/agent-guardrails)范围+突变测试门
 - [Guardrails AI x MLflow](https://guardrailsai.com/blog/guardrails-mlflow)确定性验证器作为CI分数
-- [Akira, Real-Time Guardrails for Agentic Systems](https://www.akira.ai/blog/real-time-guardrails-agentic-systems)前/后工具门
 - 阶段14 · 27 快速注射防御 (门的对抗对)
 - 阶段14 · 36 本门执行的范围合同
 - 阶段14 · 37 反记录这个门得分

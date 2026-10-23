@@ -95,7 +95,7 @@ python3 code/main.py
 
 **Separate large artifacts from state.**不要在 CSV,长的转录或生成的文件中存储`agent_state.json`保存文物作为一个独立的文件 (或上传到物体存储) 并只保持路径状态.检查点保持小和快速;文物独立增长.
 
-**Event sourcing for audit, snapshots for resume.**添加到事件日志 (`state.events.jsonl`) 在每种突变中; 定期截图`state.json`简历读取快照,然后重复快照的时间印记后的任何事件. 这成本更多的磁盘,但允许您重复代理决定字面上在调试长视线运行时至关重要.
+**Event sourcing for audit, snapshots for resume.**添加到事件日志 (`state.events.jsonl`) 在每种突变中; 定期截图`state.json`简历阅读快照,然后在快照的时间印记之后重复任何事件.这成本更多的磁盘,但允许您重复代理决定字面上在调试长视线运行时至关重要.Postgres使用相同的日志加上检查点想法在存储层上与其WAL,尽管在比应用事件低得多的水平.
 
 **Schema migrations or refuse to load.**其他`schema_version`整数是合同.当管理员在未知的版本上加载文件时,它拒绝阅读. 寄一个迁移脚本到图案弹旁边; `tools/migrate_state.py`在每一个创业公司上都会无力运行.
 
@@ -133,7 +133,7 @@ python3 code/main.py
 
 - [JSON Schema specification](https://json-schema.org/specification.html)
 - [LangGraph checkpointers](https://langchain-ai.github.io/langgraph/concepts/persistence/)
-- [Letta memory blocks](https://docs.letta.com/concepts/memory)
+- [Letta memory blocks](https://docs.letta.com/v1-sdk/memory/memory-blocks)
 - [Fast.io, AI Agent State Checkpointing: A Practical Guide](https://fast.io/resources/ai-agent-state-checkpointing/) 方案首次检查,无限性
 - [Fast.io, AI Agent Workflow State Persistence: Best Practices 2026](https://fast.io/resources/ai-agent-workflow-state-persistence/)同时控制,TTL,事件采购
 - [Hive Issue #6263 — non-atomic state.json writes silently ignored](https://github.com/aden-hive/hive/issues/6263)在一个真正的项目中失败模式
