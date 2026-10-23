@@ -87,7 +87,7 @@ Harness, güvenin softmax' dan geldiğini düşünmez.`[0, 1]`Çoklu seçim gör
 
 - Tüm tahminler yanlış: ECE ortalama güven, Brier yüksek, karmaşıklık modelin metne ne düşündüğünü.
 - Tüm tahminler yüksek güvenle doğru: ECE sıfır yakınında, Brier sıfır yakınında.
-- P=0.5'de tamamen belirsiz bir tahminçi: ECE 0.5 eksi doğruluk, Brier 0.25 eksi bir doğrulama terimi.
+- P=0.5'de tamamen belirsiz bir tahminçi: Her tahmin bir kutuya yerleşiyor, bu yüzden ECE `|0.5 - accuracy|`Brier tam olarak 0.25'dir, çünkü`(0.5 - y)^2 = 0.25`ya da`y`0 veya 1'dir.
 - Boş giriş: ECE, Brier ve güvenilirlik geri dönüşü `0.0`(veya sıfır dolmuş dizileri).`NaN`Bu yollardan hiçbiri uyarı yaymaz; koşucu değerleri inceliyor ve rapor vermek veya atlamak için karar veriyor.
 
 Bu vakalar testlere yerleştirilir. Gerçek bir referans üzerinde gerçek bir model onlara çarpar, ama bir buggy adaptörü veya küçük bir örnek çarpar ve koşucu düşmemesi gerekir.
