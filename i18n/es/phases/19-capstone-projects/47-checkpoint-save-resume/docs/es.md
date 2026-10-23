@@ -16,7 +16,7 @@
 
 ## El problema
 
-Estableces un trabajo de entrenamiento de 18 horas. El reloj de la pared tiene 4 horas. El cluster se reinicia a las 11 porque alguien por encima de su nivel de pago aprobó una actualización del kernel. Sin puestos de control empiezas de nuevo. Sin resumen también pierdes el estado de optimización que tomó las primeras 11 horas para aprender, así que incluso si los pesos del modelo sobrevivieron, los momentos de AdamW se han ido y el siguiente paso acecha en una dirección que la trayectoria de entrenamiento ya había pasado.
+Estableces un trabajo de entrenamiento de 18 horas. El programador limita cada asignación a 4 horas, por lo que la carrera ya es una cadena de puestos de trabajo reanudados. Luego el cluster se reinicia a la hora 11 de la carrera porque alguien por encima de su nivel de pago aprobó una actualización del kernel. Sin puestos de control empiezas de nuevo. Sin resumen también pierdes el estado de optimización que tomó las primeras 11 horas para aprender, así que incluso si los pesos del modelo sobrevivieron, los momentos de AdamW se han ido y el siguiente paso acecha en una dirección que la trayectoria de entrenamiento ya había pasado.
 
 El artefacto correcto es un archivo único que contiene todo lo necesario para continuar: parámetros del modelo, estado de optimizador, estado de programador, el historial de pérdidas para las parámetros, el paso actual y el tiempo y los contadores de lote en época, y el estado de RNG para cada fuente de aleatoriedad. Sin el estado de RNG la curva de pérdida reanudada es otra. El mismo modelo, los mismos datos, diferentes mezclas, diferentes máscaras de abandono, diferente número en el panel.
 
@@ -90,7 +90,7 @@ cc-atomic-checkpoint
 
 ### Paso 1: captura y restauración del estado de RNG
 
-`capture_rng_state`devuelve un dictado con Python `random.getstate`, NumPy's `np.random.get_state`, y PyTorch CPU y CUDA RNG bytes. `restore_rng_state`El tensor de la CPU es un buffer de 8 bytes que el RNG de PyTorch sabe consumir.
+`capture_rng_state`devuelve un dictado con Python `random.getstate`, NumPy's `np.random.get_state`Cada pieza se almacena como números, tuples y listas de Python (el conjunto de claves de NumPy pasa por `tolist()`), para que el cargador en el paso 3 pueda leerlo de nuevo sin deshacerse de objetos arbitrarios. `restore_rng_state`El tensor de la CPU es un buffer de 8 bytes que el RNG de PyTorch sabe consumir.
 
 ### Paso 2: rescate atómico
 
@@ -100,9 +100,11 @@ cc-atomic-checkpoint
 
 `save_checkpoint`empaque el modelo, el optimizador, el programador, el estado del tren y el RNG en un solo dictado. `load_checkpoint`lo invierte y devuelve un `TrainState`. El campo de esquema es el gancho de actualización: los cambios futuros en el formato golpean la cadena de versiones y el cargador despacha.
 
+`load_checkpoint`llamadas`torch.load(..., weights_only=True)`- ¿ Qué ?`.pt`archivo es un pickle, y despliegue un archivo no confiable con `weights_only=False`El cargador de peso sólo acepta tensores y contenedores primitivos y rechaza todo lo demás, por lo que el paso 1 mantiene el estado de RNG en listas plainas.`ValueError`en lugar de utilizar `assert`, porque`python -O`Las bandas afirman. utiliza una antorcha 2.6 o más reciente: antes de esa liberación `weights_only=True`El método de evaluación de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la calidad de la
+
 ### Paso 4: variante en fragmentos
 
-`save_sharded_checkpoint`redondea las teclas de parámetro en N fragmentos, escribe cada fragmento con su propio salvo atómico, escribe un archivo meta con optimizador y cronista y estado de tren, y escribe el índice JSON con fragmentos sha256s. `load_sharded_checkpoint`Verifica cada fragmento antes de fusionarse.
+`save_sharded_checkpoint`redondea las teclas de parámetro en N fragmentos, escribe cada fragmento con su propio salvo atómico, escribe un archivo meta con optimizador y cronista y estado de tren, y escribe el índice JSON con fragmentos sha256s. `load_sharded_checkpoint`verifique cada fragmento antes de fusionarse y rechaza cualquier trayecto de fragmento que se resuelva fuera del directorio de los puntos de control.
 
 ### Paso 5: Demostración de resumen
 
@@ -120,8 +122,9 @@ Los demos de archivo único y fragmentados afirman la diferencia máxima en 1e-4
 
 El entrenamiento de producción apila el punto de control de buques como parte del entrenador. La forma es la misma: modelo + optimizador + programador + contadores + RNG, escrito de forma atómica, nombrado por paso para que lo último sea fácil de encontrar.
 
-Tres patrones para hacer cumplir:
+Cuatro patrones para hacer cumplir:
 
+- **Load with `weights_only=True`.**Un punto de control extraído de una unidad compartida o una descarga es una entrada no confiable.
 - **Schema is a string in the payload.**Sin él no se puede evolucionar el formato sin romper las viejas corrientes.
 - **Sha256 every shard.**Una descarga silenciosa y truncada es el peor tipo de error; el cargador falla rápido o se cae tarde.
 - **Keep checkpoint cadence honest.**Salva cada N pasos y cada minuto de reloj, lo que sea más corto.
@@ -151,7 +154,7 @@ Tres patrones para hacer cumplir:
 ## Leer más
 
 - POSIX `rename`La semántica para la atomización afirma que `os.replace`se basa en.
-- Documentación de PyTorch sobre `torch.save`y `torch.load`, incluyendo `map_location`para las restauraciones transversales de dispositivos.
+- Documentación de PyTorch sobre `torch.save`y `torch.load`, incluyendo `map_location`para la restauración de dispositivos cruzados y `weights_only`para cargar archivos no fiables.
 - La lección 46 de la fase 19 cubre la acumulación de gradientes que la carga útil de este punto de control de la lección sobrevive a través.
 - La fase 19 lección 48 abarca los envoltorios distribuidos cuyo formato de dictamen estatal se adapte a este régimen.
 - El núcleo de Linux `fsync`documentación de la garantía de durabilidad detrás del renombre atómico.
