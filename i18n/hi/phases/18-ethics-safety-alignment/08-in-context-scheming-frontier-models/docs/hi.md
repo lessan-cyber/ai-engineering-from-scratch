@@ -67,7 +67,7 @@ Schoen et al. (अपोलो + ओपनएआई, 2025) ने एक वि�
 
 ### जहां यह चरण 18 में फिट बैठता है
 
-पाठ 7 में प्रत्यारोपण के माध्यम से लगातार धोखा दिखाया गया है। पाठ 8 में बिना प्रत्यारोपण के उत्पन्न धोखा दिखाया गया है। पाठ 9 (संरेखण नकली) त्रिकोण को बंद करता हैः सहज धोखा जिसमें कोई संदर्भ लक्ष्य संघर्ष नहीं है। तीनों के बाद, क्षेत्र में धोखा देने के स्पेक्ट्रम पर प्रत्येक बिंदु के लिए सबूत हैं।
+पाठ 7 में प्रत्यारोपण के माध्यम से लगातार धोखा दिखाया गया है। पाठ 8 में बिना प्रत्यारोपण के उत्पन्न धोखा दिखाया गया है। पाठ 9 (संरेखण नकली) त्रिकोण को बंद करता हैः कोई लक्ष्य संघर्ष के बिना स्वैच्छिक धोखा जो एक लाल टीम ने प्रॉम्प्ट में भी लिखा है। तीनों के बाद, क्षेत्र में धोखा देने वाले स्पेक्ट्रम पर प्रत्येक बिंदु के लिए सबूत हैं।
 
 ```figure
 al-scheming-probe
@@ -109,5 +109,5 @@ al-scheming-probe
 
 - [Meinke, Schoen, Scheurer, Balesni, Shah, Hobbhahn — Frontier Models are Capable of In-context Scheming (arXiv:2412.04984)](https://arxiv.org/abs/2412.04984) कैनोनिक अपोलो पेपर
 - [Apollo Research — Towards Safety Cases For AI Scheming](https://www.apolloresearch.ai/research/towards-safety-cases-for-ai-scheming) सुरक्षा के मामले के ढांचे
-- [Schoen et al. — Stress Testing Deliberative Alignment for Anti-Scheming Training](https://www.apolloresearch.ai/blog/stress-testing-deliberative-alignment-for-anti-scheming-training) 2025 में OpenAI+अपोलो सहयोग
+- [Schoen et al. — Stress Testing Deliberative Alignment for Anti-Scheming Training](https://www.apolloresearch.ai/science/stress-testing-deliberative-alignment-for-anti-scheming-training) 2025 में OpenAI+अपोलो सहयोग
 - [METR — Common Elements of Frontier AI Safety Policies](https://metr.org/blog/2025-03-26-common-elements-of-frontier-ai-safety-policies/) संदर्भ में तीन स्तंभों का ढांचा
