@@ -1,6 +1,6 @@
 # वास्तविक समय दृष्टि  एज डिप्लोयमेंट
 
-> एज इन्फेरेंस 90 की सटीकता मॉडल को 2 जीबी रैम वाले डिवाइस पर 30 फ़ीप्स प्रति सेकंड पर चलाने का अनुशासन है। सटीकता के प्रत्येक प्रतिशत बिंदु का लेनदेन लैटेंस के मिलीसेकंड के साथ किया जाता है।
+> एज इन्फेरेंस एक 90 प्रतिशत सटीक मॉडल को 2 जीबी रैम वाले डिवाइस पर 30 फ़ीप्स प्रति सेकंड पर चलाने का अनुशासन है। सटीकता के प्रत्येक प्रतिशत बिंदु का लेनदेन लैटेंस के मिलीसेकंड के साथ किया जाता है।
 
 **Type:** Learn + Build
 **Languages:** Python
@@ -41,7 +41,7 @@ flowchart LR
     style PWR fill:#dbeafe,stroke:#2563eb
 ```
 
-- **Latency**: p50, p95, p99. केवल p50 का औसत करके पूंछ व्यवहार छिपाया जाता है जो वास्तविक समय प्रणालियों के लिए मायने रखता है।
+- **Latency**: p50, p95, p99. केवल p50 (या औसत) रिपोर्टिंग से पूंछ व्यवहार छिपा जाता है जो वास्तविक समय प्रणालियों के लिए मायने रखता है।
 - **Peak memory**यह महत्वपूर्ण है क्योंकि एम्बेडेड लक्ष्य पर ओओएम घातक हैं।
 - **Power / energy**: बैटरी संचालित डिवाइस पर प्रति अनुमान प्रति मिलीयूल्स। अक्सर CPU/GPU उपयोग समय * द्वारा प्रॉक्सी।
 
@@ -270,5 +270,5 @@ def compare_regimes():
 
 - [EfficientNet (Tan & Le, 2019)](https://arxiv.org/abs/1905.11946) कुशल वास्तुकला के लिए यौगिक स्केलिंग
 - [MobileNetV3 (Howard et al., 2019)](https://arxiv.org/abs/1905.02244) h-swish और squeeze-excite के साथ मोबाइल-प्रथम वास्तुकला
-- [A Practical Guide to TensorRT Optimization (NVIDIA)](https://developer.nvidia.com/blog/accelerating-model-inference-with-tensorrt-tips-and-best-practices-for-pytorch-users/) कागज में दर दरों को कैसे प्राप्त करें
+- [Accelerating Inference Up to 6x Faster in PyTorch with Torch-TensorRT (NVIDIA)](https://developer.nvidia.com/blog/accelerating-inference-up-to-6x-faster-in-pytorch-with-torch-tensorrt/) कागज में दर दरों को कैसे प्राप्त करें
 - [ONNX Runtime docs](https://onnxruntime.ai/docs/) क्वांटिसेशन, ग्राफ अनुकूलन, प्रदाता चयन
