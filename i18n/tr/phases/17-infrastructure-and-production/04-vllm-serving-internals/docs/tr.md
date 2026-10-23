@@ -11,8 +11,8 @@
 
 - PagedAttention'u KV önbelleği tahsiscisi olarak açıklayın: bloklar, blok tabloları ve neden parçalanma üretim yükünde% 4'ten düşük kalır.
 - İterasyon düzeyinde sürekli serileme diyalogu: bitmiş dizilerin seriyi nasıl terk ettiğini ve yeni dizilerin boşaltılmadan nasıl birleştiğini gösterir.
-- Bir cümlede parçalanmış prefill'i tanımlayın ve hangi gecikme metrikini koruduğunu belirtin (söyleme: TTFT kuyruk, geçiş anlamına gelmez).
-- 2026 vLLM v0.18.0'un adını verin. Tüm optimizasyonları bir anda sağlayan takımları ısırır.
+- Bir cümle ve isimde parçalanmış prefill'i tanımlayın ve hangi gecikme metrikini korur (söyleyin: aynı anda decode edilenlerin ITL kuyrukudur, geçiş anlamına gelmez).
+- Her optimizasyonu bir anda etkinleştirmeden önce, vLLM özellik kombinasyonunu sürümünüz için uyumluluk matrisine karşı kontrol edin.
 
 ## Sorun
 
@@ -44,7 +44,7 @@ Her dekodlama aşamasında sürekli seri çalışması yürütülür.`RUNNING`li
 
 İsteğe bağlı olarak, bir seri seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, bir seri olarak, 2026 vLLM olarak, bir dizi olarak, bir dizi olarak, bir dizi olarak, bir dizi olarak, bir dizi olarak, bir dizi olarak, bir dizi olarak, bir dizi olarak, bir dizi olarak, bir dizi olarak, bir olarak, bir olarak, bir olarak,`V1 scheduler`Anahtar değişmezliği: programlayıcı, her dekodlama iterasyonunda bir kez çalıştırılır, istek için değil.
 
-### Parçalama prefill TTFT kuyruğunu korur
+### Parçalama prefill, ITL kuyrukunu korur.
 
 Prefill hesaplama bağlıdır. Llama 3.3 70B'de 32k-token istek bir H100'de ~800 ms saf prefill alır. Prefill çalışırken, seri bekleyen diğer her dizi için tokenleri çözün. Bir servis döngüsünde, bir uzun istek için ilk token gecikmesi (TTFT) onlarca diğer kullanıcı için inter-token gecikme (ITL) blip olur.
 
@@ -56,9 +56,9 @@ Tüm üç özellik birbirini kabul eder. PagedAttention programcıya ticaret iç
 
 Her bayrağı bilmenize gerek yok.Sedülerin neyi optimize ettiğini bilmelisiniz: KV blok bütçesine uygun, parçalara ayırılmış prefill slicing'e tabi.
 
-### 2026 v0.18.0'u aldın.
+### Uygunluk matrisini kontrol edin
 
-vLLM v0.18.0' da birleştiremezsiniz `--enable-chunked-prefill`(Draf model spekülasyonsal çözme ile)`--speculative-model`) Belli bir istisna, V1 programcıda N-gram GPU spekülatör çözümüdür. Sergi notlarını okumadan her bayrağı açan takımlar, başlatma sırasında bir çalıştırma hatası elde eder, yumuşak bir gerileme değil. Eğer spekülatör kazancınız parçalanmış prefill için etkinleştirmeye değerse, seçeneği tekrar gözden geçirin  2026'da doğru cevap genellikle parçalanmış prefill olmadan EAGLE-3'dir, bir taslak model değil ve toplanmayan parçalanmış prefill.
+Her özellik kombinasyonunu vLLM sürümünüz için uyumluluk matrisine karşı kontrol edin, çünkü tümünü bir anda etkinleştirmeden önce, yayınlar arasında değişiklikler yapılır. V0.18.0'da özellik matrisi spekülasyonsal çözümü parçalara ayık prefill ve prefix önbelleği ile uyumlu olarak işaretler ve spekülasyonsal çözümü sayfasında bilinen iki uyumsuzluk listesi bulunur: v0.15.0'den yoluyla boru paralelliği ve v0.10.0'dan yoluyla taslak model spekülasyonu. Özetleme yönteminin kendisi için, 2026'da belirlenmiş durum genellikle EAGLE-3 (`"method": "eagle3"`), 17 · 05. aşamada kapsamlıdır.
 
 ### Hatırlamalısın numaralar
 
@@ -130,8 +130,8 @@ Bu ders bize çok yararlı .`outputs/skill-vllm-scheduler-reader.md`. Bir servis
 | Chunked prefill | "prefill splitting" | Break long prefill into 512-token slices interleaved with decode |
 | TTFT | "first token time" | Prefill + queue + network; dominated by prefill at long prompts |
 | ITL | "inter-token latency" | Time between consecutive decode tokens; dominated by batch size |
-| Goodput | "throughput that meets SLO" | Tokens/sec where every request still hit TTFT and ITL targets |
-| V1 scheduler | "the new scheduler" | vLLM's 2026 scheduler; N-gram spec decode is the chunked-prefill-compatible path |
+| Goodput | "throughput that meets SLO" | Requests/sec that still hit TTFT and ITL targets (Phase 17 · 08 reports it as the share of requests) |
+| V1 scheduler | "the new scheduler" | vLLM's 2026 scheduler; runs continuous batching with chunked prefill |
 | `--gpu-memory-utilization` | "the memory knob" | Fraction of HBM reserved for KV blocks after weights and activations |
 
 ## Daha Fazla Okumak

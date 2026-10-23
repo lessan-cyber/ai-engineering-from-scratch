@@ -94,6 +94,8 @@ roofline
 
 `code/main.py`Oyuncak bir radix-tree KV önbelleği ek olarak iki politika ile bir programlayıcı: FCFS ve önbelleği farkındadır. Her ikisinden de aynı iş yükünü çalışır, önbelleği önbelleği isabet oranı ve özet delta raporları.
 
+- Evet .[Inside an LLM Serving GPU](https://aiengineeringfromscratch.com/inside-an-llm-serving-gpu?workload=shared&shared=4096)makine gerçek bir L4 çalışmasında radix önbelleğini gösterir. Dört grubun her birinin kendi 4.096 jeton sistem sorgulaması vardır. Bir grubun ilk istekleri onun sorgulamasını hesaplar. Bu sorgulama önbellekte kalırken, grubun sonraki istekleri sadece 128- jeton sorgulamasını hesaplar.
+
 ## Gönder
 
 Bu ders bize çok yararlı .`outputs/skill-radix-scheduler-advisor.md`. İş yükünün bir açıklaması (sürekli şablon şekli, geri alım örneği, eş zamanlı kiracı sayısı) verildiğinde, SGLang'ın kabul edilmesi için bir sürekli sipariş reçetesini ve bir git/götürme reçetesini üretir.
@@ -125,4 +127,4 @@ Bu ders bize çok yararlı .`outputs/skill-radix-scheduler-advisor.md`. İş yü
 - [SGLang documentation](https://sgl-project.github.io/) Radixİzdenme ve programlama detayları.
 - [SGLang paper — Efficiently Programming Large Language Models (arXiv:2312.07104)](https://arxiv.org/abs/2312.07104) tasarım referansı.
 - [LMSYS blog — SGLang with RadixAttention](https://www.lmsys.org/blog/2024-01-17-sglang/) Referans sayıları ve programcı mantıklılığı.
-- [vLLM — Prefix Caching](https://docs.vllm.ai/en/latest/features/prefix_caching.html) vLLM'nin kendi radikal uygulaması, karşılaştırma için.
+- [vLLM — Prefix Caching](https://docs.vllm.ai/en/latest/features/automatic_prefix_caching/) vLLM'nin kendi radikal uygulaması, karşılaştırma için.
