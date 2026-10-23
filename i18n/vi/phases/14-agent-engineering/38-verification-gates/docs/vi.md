@@ -87,7 +87,7 @@ Kết quả: ba bản báo cáo phán quyết, mỗi bản lưu bên cạnh kị
 
 ## Các mô hình sản xuất trong tự nhiên
 
-Bốn mô hình nâng cổng từ "một công việc lông khác" lên "về quyết định".
+Năm mô hình nâng cổng từ "một công việc lông khác" lên "về quyết định".
 
 **Defense-in-depth, not single gate.**Hook trước giao dịch → kiểm tra tình trạng CI → hook trước công cụ authz → cổng trước hợp nhất. Mỗi lớp là xác định, do đó một thất bại trong một lớp được bắt bởi lớp tiếp theo. sổ chơi tháng 3 năm 2026 của microservices.io là rõ ràng: hook trước giao dịch không thể vượt qua bởi vì, không giống như một kỹ năng bên mô hình, nó không phụ thuộc vào đại lý theo hướng dẫn. Cổng xác minh nằm ở lớp CI / pre-merge.
 
@@ -140,7 +140,6 @@ Cổng là cạnh quyết định trong dòng chảy của bàn làm việc.
 - [Type-Checked Compliance: Deterministic Guardrails (arXiv 2604.01483)](https://arxiv.org/pdf/2604.01483) Lean 4 như giới hạn trên của định nghĩa gào
 - [logi-cmd/agent-guardrails — merge gate spec](https://github.com/logi-cmd/agent-guardrails) phạm vi + cổng thử nghiệm đột biến
 - [Guardrails AI x MLflow](https://guardrailsai.com/blog/guardrails-mlflow) Các xác thực viên xác định như là điểm số CI
-- [Akira, Real-Time Guardrails for Agentic Systems](https://www.akira.ai/blog/real-time-guardrails-agentic-systems) Cổng trước/ sau công cụ
 - Giai đoạn 14 · 27  phòng thủ tiêm nhanh (cặp đối thủ của cổng)
 - Giai đoạn 14 · 36  hợp đồng phạm vi này thực thi
 - Giai đoạn 14 · 37  hồ sơ phản hồi này cửa điểm
