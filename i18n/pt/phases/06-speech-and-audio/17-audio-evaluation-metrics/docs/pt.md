@@ -45,7 +45,7 @@ Cada tarefa de áudio tem múltiplas métricas, cada uma medindo um eixo diferen
 
 **SECS (Speaker Encoder Cosine Similarity).**Para clonagem de voz. ECAPA incorporando cosino entre referência e saída clonada. &gt; 0,75 = clone reconhecível.
 
-**WER-on-ASR-round-trip.**Execute Whisper sobre a saída TTS, computa WER contra o texto de entrada. Capta regressões de inteligibilidade. 2026 SOTA: &lt; 2% CER.
+**WER-on-ASR-round-trip.**Execute Whisper sobre a saída TTS, computa WER contra o texto de entrada. Capta regressões de inteligibilidade. 2026 SOTA: &lt; 2% WER em conjuntos de teste em inglês (em vez disso, conjuntos mandarinos relatam CER).
 
 **TTFA (time-to-first-audio).**Latência de relógio de parede. Kokoro-82M: ~ 100 ms; F5-TTS: ~ 1 s.
 
@@ -79,7 +79,7 @@ Desbalançado: **macro F1**+ **per-class recall**. Relatório por classe  A prec
 
 **CLAP Score.**Pontuação de alinhamento de texto-áudio usando embalagens CLAP. &gt; 0,3 = alinhamento razoável.
 
-**Listening panel MOS.**Ainda a última palavra para música de nível de consumo. Suno v5 ELO 1293 no TTS Arena (de preferências humanas emparelhadas).
+**Listening panel MOS.**Ainda a palavra final para música de nível de consumo. Suno v5 marcou ELO 1293 no próprio índice de preferência em pares de Suno.
 
 ### Indicadores de referência de áudio
 
@@ -106,7 +106,7 @@ Desbalançado: **macro F1**+ **per-class recall**. Relatório por classe  A prec
 | Open ASR Leaderboard (HF) | English + multilingual + long-form | `huggingface.co/spaces/hf-audio/open_asr_leaderboard` |
 | TTS Arena (HF) | English TTS | `huggingface.co/spaces/TTS-AGI/TTS-Arena` |
 | Artificial Analysis Speech | TTS + STT, ELO from paired votes | `artificialanalysis.ai/speech` |
-| MMAU-Pro | LALM reasoning | `mmaubenchmark.github.io` |
+| MMAU-Pro | LALM reasoning | `sonalkum.github.io/mmau-pro` |
 | SpeakerBench / VoxSRC | Speaker recognition | `voxsrc.github.io` |
 | MMAU music subset | Music LALM | (within MMAU) |
 | HEAR benchmark | Self-supervised audio | `hearbenchmark.com` |
@@ -224,5 +224,5 @@ Salva como`outputs/skill-audio-evaluator.md`Selecionar métricas, referências e
 - [Fréchet Audio Distance (Kilgour et al. 2019)](https://arxiv.org/abs/1812.08466)- O padrão da geração musical.
 - [Open ASR Leaderboard](https://huggingface.co/spaces/hf-audio/open_asr_leaderboard) 2026 rankings ao vivo.
 - [TTS Arena](https://huggingface.co/spaces/TTS-AGI/TTS-Arena) TTS líder de votos humanos.
-- [MMAU-Pro benchmark](https://mmaubenchmark.github.io/) Lista de resultados de raciocínio da LALM.
+- [MMAU-Pro benchmark](https://sonalkum.github.io/mmau-pro/) Lista de resultados de raciocínio da LALM.
 - [HEAR benchmark](https://hearbenchmark.com/) Referências de SSL de áudio.
