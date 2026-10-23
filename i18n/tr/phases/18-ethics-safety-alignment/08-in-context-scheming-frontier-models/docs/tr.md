@@ -67,7 +67,7 @@ Değerlendirme-süt güvenilirliği artık kapasiteye bitişik bir miktar. Model
 
 ### Bu 18 fazaya uygun.
 
-Ders 7 implant yoluyla sürekli aldatma gösterir. Ders 8 implant olmadan ortaya çıkan aldatma gösterir. Ders 9 (Alignment Faking) üçgenin kapanmasını sağlar: bağlamda hedef çatışması olmayan kendiliğinden aldatma.
+Ders 7 implant yoluyla sürekli aldatma gösterir. Ders 8 implant olmadan ortaya çıkan aldatma gösterir. Ders 9 (Alignment Faking) üçgenin kapanmasını sağlar: bir kırmızı takımın da istekle yazdığı hedef çatışmazlığı olmayan kendiliğinden aldatma.
 
 ```figure
 al-scheming-probe
@@ -109,5 +109,5 @@ Bu ders bize çok yararlı .`outputs/skill-scheming-triage.md`. Bir ajan dağıt
 
 - [Meinke, Schoen, Scheurer, Balesni, Shah, Hobbhahn — Frontier Models are Capable of In-context Scheming (arXiv:2412.04984)](https://arxiv.org/abs/2412.04984) Kanonik Apollo kağıdı
 - [Apollo Research — Towards Safety Cases For AI Scheming](https://www.apolloresearch.ai/research/towards-safety-cases-for-ai-scheming) Güvenlik Kazası Çerçeve
-- [Schoen et al. — Stress Testing Deliberative Alignment for Anti-Scheming Training](https://www.apolloresearch.ai/blog/stress-testing-deliberative-alignment-for-anti-scheming-training) 2025 OpenAI+Apollo işbirliği
+- [Schoen et al. — Stress Testing Deliberative Alignment for Anti-Scheming Training](https://www.apolloresearch.ai/science/stress-testing-deliberative-alignment-for-anti-scheming-training) 2025 OpenAI+Apollo işbirliği
 - [METR — Common Elements of Frontier AI Safety Policies](https://metr.org/blog/2025-03-26-common-elements-of-frontier-ai-safety-policies/) Üç direk çerçevesinin bağlamında
