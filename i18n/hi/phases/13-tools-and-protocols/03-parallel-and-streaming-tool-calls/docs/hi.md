@@ -66,7 +66,7 @@ LLM -> final text answer
 
 मेजबान प्रत्येक कॉल के निष्पादक को अपने स्वयं के धागे, कॉरोटीन या रिमोट वर्कर पर चलाता है। सबसे सरल हार्नेस एक धागे पूल का उपयोग करता है; उत्पादन में असिनसियो का उपयोग होता है।`asyncio.gather`पूर्णता का क्रम अप्रत्याशित है  पहचानकर्ता आईडी है।
 
-एक आम बगः कॉल-लिस्ट क्रम में परिणामों के साथ उत्तर दें पूरा करने के क्रम के बजाय। यह आमतौर पर काम करता है क्योंकि मॉडल केवल परवाह करता है`tool_call_id`, लेकिन यदि कोई परिणाम गिराया जाता है या दोहराया जाता है, तो ऑर्डर से बाहर सबमिशन डिबगिंग को कठिन बनाता है। स्पष्ट आईडी के साथ पूर्ण क्रम में उत्तर देना पसंद है।
+एक आम बगः कॉल-लिस्ट क्रम में परिणामों के साथ उत्तर दें पूरा करने के क्रम के बजाय। यह आमतौर पर काम करता है क्योंकि मॉडल केवल परवाह करता है`tool_call_id`, लेकिन यदि कोई परिणाम छोड़ दिया जाता है या दोहराया जाता है, तो परिणामों के प्राप्त क्रम से दूर उत्तर सूची को पुनः क्रमबद्ध किया जाता है लॉग में अंतर को ढूंढना मुश्किल बनाता है। स्पष्ट आईडी के साथ पूर्ण क्रम में उत्तर देना बेहतर है।
 
 ### स्ट्रीमिंग टूल कॉल
 
@@ -158,7 +158,7 @@ tp-parallel-fanout
 ## आगे पढ़ना
 
 - [OpenAI — Parallel function calling](https://platform.openai.com/docs/guides/function-calling#parallel-function-calling) डिफ़ॉल्ट व्यवहार और ऑप्ट-आउट ध्वज
-- [Anthropic — Tool use: implementing tool use](https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/implementing-tool-use) `disable_parallel_tool_use`और परिणाम बैचिंग
+- [Anthropic — Parallel tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/parallel-tool-use) `disable_parallel_tool_use`और परिणाम बैचिंग
 - [Google — Gemini function calling parallel section](https://ai.google.dev/gemini-api/docs/function-calling) मिथुन 3 से आईडी-संदर्भित समानांतर कॉल
 - [OpenAI — Streaming responses with tools](https://platform.openai.com/docs/api-reference/responses-streaming) OpenAI धाराओं के लिए टुकड़े टुकड़े तर्क फिर से इकट्ठा
 - [Anthropic — Streaming messages](https://docs.anthropic.com/en/api/messages-streaming) `content_block_delta`के साथ`input_json_delta`
