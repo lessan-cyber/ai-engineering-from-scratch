@@ -1,6 +1,6 @@
 # 实时视觉 边缘部署
 
-> 边缘推断是让90度精度模型在2GB内存的设备上以30fps运行的学科.每个精度百分点都与延迟毫秒进行交易.
+> 边缘推理是让90%精确的模型在2GB内存的设备上以30fps运行的学科.每个百分点的精确度都与毫秒的延迟进行交易.
 
 **Type:** Learn + Build
 **Languages:** Python
@@ -41,7 +41,7 @@ flowchart LR
     style PWR fill:#dbeafe,stroke:#2563eb
 ```
 
-- **Latency**平均只有p50隐藏了对实时系统重要的尾巴行为.
+- **Latency**报告仅为p50 (或平均值) 隐藏了对实时系统重要的一种尾声行为.
 - **Peak memory**机器能看到的最大值,而不是稳定状态的平均值.
 - **Power / energy**电池驱动设备的推断量为每次毫. 通常由CPU/GPU使用时间*来代理.
 
@@ -270,5 +270,5 @@ def compare_regimes():
 
 - [EfficientNet (Tan & Le, 2019)](https://arxiv.org/abs/1905.11946)复合扩展,以实现高效的建筑
 - [MobileNetV3 (Howard et al., 2019)](https://arxiv.org/abs/1905.02244)移动首选架构,具有h-swish和squeeze-excite
-- [A Practical Guide to TensorRT Optimization (NVIDIA)](https://developer.nvidia.com/blog/accelerating-model-inference-with-tensorrt-tips-and-best-practices-for-pytorch-users/)如何实际上在纸上获取吞吐量数字
+- [Accelerating Inference Up to 6x Faster in PyTorch with Torch-TensorRT (NVIDIA)](https://developer.nvidia.com/blog/accelerating-inference-up-to-6x-faster-in-pytorch-with-torch-tensorrt/)如何实际上在纸上获取吞吐量数字
 - [ONNX Runtime docs](https://onnxruntime.ai/docs/)量化,图表优化,供应商选择
