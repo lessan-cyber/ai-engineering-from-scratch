@@ -87,7 +87,7 @@ Le harnais ne suppose pas que la confiance provienne de softmax.`[0, 1]`Pour les
 
 - Toutes les prédictions sont fausses: ECE est la confiance moyenne, Brier est élevé, la perplexité est ce que le modèle pense du texte.
 - Toutes les prédictions sont correctes avec une grande confiance: ECE près de zéro, Brier près de zéro.
-- Prédicteur parfaitement incertain à p = 0,5: ECE est de 0,5 moins la précision, Brier est de 0,25 moins un terme de correction.
+- Préditeur parfaitement incertain à p = 0,5: chaque prédiction tombe dans un coffre, donc ECE est `|0.5 - accuracy|`Le Brier est exactement 0,25 parce que`(0.5 - y)^2 = 0.25`si `y`est de 0 ou 1.
 - Entrée vide: retour de la CEE, de la Brier et de la fiabilité `0.0`(ou des matrices remplies de zéro).`NaN`Pour le cas de jetons zéro, aucun de ces chemins n'émet un avertissement; le coureur inspecte les valeurs et décide de signaler ou de sauter.
 
 Un vrai modèle sur un vrai point de référence ne les touchera pas, mais un adaptateur de buggy ou un échantillon minuscule le fera, et le coureur ne devrait pas s'écraser.
