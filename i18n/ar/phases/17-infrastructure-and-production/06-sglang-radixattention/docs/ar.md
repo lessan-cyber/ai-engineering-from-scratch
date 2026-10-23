@@ -94,6 +94,8 @@ roofline
 
 `code/main.py`ينفذ جهاز التخزين KV لعبة radix-tree بالإضافة إلى جهاز جدولة مع سياستين: FCFS و cache-aware. يعمل بنفس حمل العمل من خلال كليهما ، ويذكر معدل ضربات الاحتياطي المسبق و دلتا الانتقال. ثم يعمل على حمل عمل "تزويج ترتيب" لإظهار انهيار 6.4x.
 
+- نعم[Inside an LLM Serving GPU](https://aiengineeringfromscratch.com/inside-an-llm-serving-gpu?workload=shared&shared=4096)يظهر الآلة الاحتفاظ بالرقم المتبقي على رقم L4 الحقيقي. أربعة مجموعات لكل منها عرض نظامها الخاص بـ 4,096 رمز. يعد أول طلب من مجموعة عرضها. في حين يبقى هذا الطلب في الاحتفاظ بالرقم المتبقي، فإن طلبات لاحقة من المجموعة تحسب فقط سؤال 128 رمز. قم بتغلق الاحتفاظ بالرقم المتبقي لرى متوسط رمز الأول يذهب من 479 ms إلى 14,706 ms.
+
 ## أرسله
 
 هذا الدرس يُنتج`outputs/skill-radix-scheduler-advisor.md`. بالنظر إلى وصف الحملة (شكل نموذج العرض، نمط الاسترداد، عدد المستأجرين المتزامنين) ، فإنه ينتج وصفة طلب العرض والذهاب / عدم الذهاب لتبني SGLang.
@@ -125,4 +127,4 @@ roofline
 - [SGLang documentation](https://sgl-project.github.io/) الاهتمام و التفاصيل في الجدول الزمني
 - [SGLang paper — Efficiently Programming Large Language Models (arXiv:2312.07104)](https://arxiv.org/abs/2312.07104) مرجع التصميم
 - [LMSYS blog — SGLang with RadixAttention](https://www.lmsys.org/blog/2024-01-17-sglang/) أرقام المرجعية وبرز المخطط
-- [vLLM — Prefix Caching](https://docs.vllm.ai/en/latest/features/prefix_caching.html) تنفيذ vLLM نفسه مثل الجذور، للمقارنة.
+- [vLLM — Prefix Caching](https://docs.vllm.ai/en/latest/features/automatic_prefix_caching/) تنفيذ vLLM نفسه مثل الجذور، للمقارنة.
