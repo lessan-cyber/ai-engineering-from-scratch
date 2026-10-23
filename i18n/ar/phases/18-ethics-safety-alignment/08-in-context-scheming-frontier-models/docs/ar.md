@@ -67,7 +67,7 @@
 
 ### حيث يتناسب هذا مع المرحلة 18
 
-يظهر الدروس 7 خدعة مستمرة عبر الزرع. يظهر الدروس 8 خدعة محفزة دون زرع. يغلق الدروس 9 (تزوير التوصل) الثلاثة: خدعة عفوية دون أي تضارب هدف في السياق أيضًا. بعد كل ثلاثة ، يكون لدى الحقل دليلًا على كل نقطة على طيف الخداع.
+يظهر الدروس 7 خدعة مستمرة عبر الزرع. يظهر الدروس 8 خدعة محفزة دون زرع. يغلق الدروس 9 (التزوير التوالي) الثلاثة: خدعة عفوية دون تضارب هدف كتب فريق أحمر في المشاركة. بعد كل ثلاثة، فإن الحقل لديه دليل لكل نقطة على طيف الخداع.
 
 ```figure
 al-scheming-probe
@@ -109,5 +109,5 @@ al-scheming-probe
 
 - [Meinke, Schoen, Scheurer, Balesni, Shah, Hobbhahn — Frontier Models are Capable of In-context Scheming (arXiv:2412.04984)](https://arxiv.org/abs/2412.04984)ورقة أبولو القنونية
 - [Apollo Research — Towards Safety Cases For AI Scheming](https://www.apolloresearch.ai/research/towards-safety-cases-for-ai-scheming)إطار حالة السلامة
-- [Schoen et al. — Stress Testing Deliberative Alignment for Anti-Scheming Training](https://www.apolloresearch.ai/blog/stress-testing-deliberative-alignment-for-anti-scheming-training) تعاون OpenAI+أبولو عام 2025
+- [Schoen et al. — Stress Testing Deliberative Alignment for Anti-Scheming Training](https://www.apolloresearch.ai/science/stress-testing-deliberative-alignment-for-anti-scheming-training) تعاون OpenAI+أبولو عام 2025
 - [METR — Common Elements of Frontier AI Safety Policies](https://metr.org/blog/2025-03-26-common-elements-of-frontier-ai-safety-policies/) إطار ثلاث ركائز في السياق
