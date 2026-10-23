@@ -95,7 +95,7 @@ python3 code/main.py
 
 **Separate large artifacts from state.**لا تخزين CSVs، النصوص الطويلة، أو الملفات التي تم إنشاؤها في `agent_state.json`. حفظ الفن كملف منفصل (أو تحميل إلى تخزين الكائن) والحفاظ فقط على المسار في حالة. نقاط التفتيش تبقى صغيرة وسريعة؛ وتتنمو الفن بشكل مستقل.
 
-**Event sourcing for audit, snapshots for resume.**إضافة إلى سجل الأحداث (`state.events.jsonl`) على كل طفرة ، بصورة دورية لـ`state.json`. يستأنف يقرأ اللقطة ، ثم يعيد إعادة تشغيل أي أحداث بعد طابع الوقت للوقطة. هذا يكلف المزيد من القرص ولكن يسمح لك بإعادة تشغيل قرارات الوكيل حرفيا  ضرورية عند إزالة تشغيلات الأفق الطويل. نفس الشكل الذي يستخدمه Postgres داخلياً لـ WAL.
+**Event sourcing for audit, snapshots for resume.**إضافة إلى سجل الأحداث (`state.events.jsonl`) على كل طفرة ، بصورة دورية لـ`state.json`. يستأنف يقرأ اللقطة ، ثم يعيد إعادة تشغيل أي أحداث بعد طابع الوقت للوقطة. هذا يكلف المزيد من القرص ولكن يسمح لك بإعادة تشغيل قرارات الوكيل حرفيا  ضرورية عند إزالة الأفق الطويل. يستخدم Postgres نفس فكرة السجل بالإضافة إلى نقطة التفتيش في طبقة التخزين مع WAL ، على الرغم من أنه على مستوى أقل بكثير من الأحداث التطبيقية.
 
 **Schema migrations or refuse to load.**- نعم`schema_version`عدد كامل هو العقد. عندما يقوم المدير بتحميل ملف في نسخة مجهولة، فإنه يرفض قراءته. أرسل نص هجرة إلى جانب عجلة النظام؛ `tools/migrate_state.py`يدير بشكل غير قوي على كل شركة ناشئة
 
@@ -133,7 +133,7 @@ python3 code/main.py
 
 - [JSON Schema specification](https://json-schema.org/specification.html)
 - [LangGraph checkpointers](https://langchain-ai.github.io/langgraph/concepts/persistence/)
-- [Letta memory blocks](https://docs.letta.com/concepts/memory)
+- [Letta memory blocks](https://docs.letta.com/v1-sdk/memory/memory-blocks)
 - [Fast.io, AI Agent State Checkpointing: A Practical Guide](https://fast.io/resources/ai-agent-state-checkpointing/) التفتيش الأول للخطط مع عدم القدرة على التفوق
 - [Fast.io, AI Agent Workflow State Persistence: Best Practices 2026](https://fast.io/resources/ai-agent-workflow-state-persistence/) التحكم في التزامن، TTL، مصادر الأحداث
 - [Hive Issue #6263 — non-atomic state.json writes silently ignored](https://github.com/aden-hive/hive/issues/6263) وضع الفشل في مشروع حقيقي
