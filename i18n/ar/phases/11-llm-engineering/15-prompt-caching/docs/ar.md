@@ -46,7 +46,7 @@
 
 ### حساب الانسجام
 
-تعني قسيمة كتابة 25% من Anthropic أن بلوك مخزن يجب قراءته مرتين على الأقل لتوفير الأموال الصافية. 1 كتابة + 1 قراءة يبلغ متوسط التكلفة 0.675x لكل طلب (يوفر 32%). 1 كتابة + 10 قراءة يبلغ متوسط 0.205x (يوفر 80%). قاعدة البصمة: حفظ أي شيء تتوقع إعادة استخدامه على الأقل 3 مرات داخل TTL.
+تكلفة كتابة Anthropic بنسبة 25% (5 دقيقة TTL) نفسها عند القراءة الأولى ، لأن قراءة التخزين تكلف 0.1x. 1 كتابة + 1 قراءة متوسط 0.675x تكلفة لكل طلب (إمداد 32%) ؛ 1 كتابة + 10 قراءة متوسط 0.205x (إمداد 80%). تتل ساعة واحدة تتقاضى 2x للكتب، لذلك تلك الكتل تحتاج إلى قراءة اثنين للخروج في الأمام. قاعدة عامة: تخزين أي شيء تتوقع إعادة استخدامه على الأقل 3 مرات داخل TTL؛ وهذا يمنع الاختراق على أي من TTL.
 
 ```figure
 prompt-cache-hit
@@ -141,7 +141,7 @@ from google.genai import types
 client = genai.Client()
 
 cache = client.caches.create(
-    model="gemini-3-pro",
+    model="gemini-3.8-flash",
     config=types.CreateCachedContentConfig(
         display_name="rubric-v3",
         system_instruction=RUBRIC,
@@ -151,7 +151,7 @@ cache = client.caches.create(
 )
 
 resp = client.models.generate_content(
-    model="gemini-3-pro",
+    model="gemini-3.8-flash",
     contents=["Review this code:\n" + code],
     config=types.GenerateContentConfig(cached_content=cache.name),
 )
