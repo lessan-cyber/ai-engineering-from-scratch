@@ -55,8 +55,8 @@ flowchart LR
 
 التعلم في تكوين النص البسيط `epsilon_theta(x_t, t, c)`لكل طلب`c`. CFG تدرب نفس الشبكة مع `c`انخفضت 10% من الوقت (حل محلها بتوابل فارغة) ، مما يعطي نموذج واحد يتوقع كل من الضجيج المشروط وغير المشروط.
 
-```
-eps = eps_uncond + w * (eps_cond - eps_uncond)
+```math
+\epsilon = \epsilon_{\text{uncond}} + w \cdot (\epsilon_{\text{cond}} - \epsilon_{\text{uncond}})
 ```
 
 `w`هو مقياس التوجيه`w=0`غير مشروط`w=1`هو مشروط`w>1`يدفع الإنتاج نحو "أكثر مشروطة على الإستعراض" على حساب التنوع.`w=7.5`. . .
@@ -193,13 +193,16 @@ out = inpaint(
 ### الخطوة 5: تحميل لورا
 
 ```python
-pipe.load_lora_weights("sayakpaul/sd-lora-ghibli")
+pipe.load_lora_weights(
+    "artificialguybr/studioghibli-redmond-1-5v-studio-ghibli-lora-for-liberteredmond-sd-1-5",
+    weight_name="StudioGhibliRedmond-15V-LiberteRedmond-StdGBRedmAF-StudioGhibli.safetensors",
+)
 pipe.fuse_lora(lora_scale=0.8)
 
-image = pipe(prompt="a village square in ghibli style").images[0]
+image = pipe(prompt="a village square, StdGBRedmAF, Studio Ghibli").images[0]
 ```
 
-`lora_scale`يحدد قوة؛ 0.0 = لا تأثير، 1.0 = تأثير كامل. `fuse_lora`يخبز المعدل إلى الأوزان الموضحة لسرعة، ولكن يمنع التبادل.`pipe.unfuse_lora()`قبل تحميل جهاز تعديل مختلف
+عبارة الإطلاق من بطاقة النموذج (`StdGBRedmAF, Studio Ghibli`) يُشغّلُ النمط. `lora_scale`يحدد قوة؛ 0.0 = لا تأثير، 1.0 = تأثير كامل. `fuse_lora`يخبز المعدل إلى الأوزان الموضحة لسرعة، ولكن يمنع التبادل.`pipe.unfuse_lora()`قبل تحميل جهاز تعديل مختلف
 
 ### الخطوة 6: تدريب لوري (رسم)
 
@@ -232,7 +235,7 @@ for step, batch in enumerate(dataloader):
 
 - **Model family**: SD 1.5 لموسيقى مجتمع مفتوحة المصدر ، SDXL لتحقيق أعلى ، SD3 / FLUX للحصول على أحدث وتطلبات الترخيص الصارمة.
 - **Scheduler**: DPM-Solver++ 2M Karras لمدة 20-30 خطوة، LCM-LoRA عندما يكون التأخير أقل من 1 ثانية.
-- **Precision**: `float16`في 4080/4090`bfloat16`على A100 وأحدث،`int8`(بـ (`bitsandbytes`أو`compel`) عندما تكون VRAM ضيقة.
+- **Precision**: `float16`في 4080/4090`bfloat16`على A100 وأحدث،`int8`(بـ (`bitsandbytes`) عندما تكون VRAM ضيقة.
 - **Conditioning**: يعمل النص البسيط؛ لإضافة ControlNet (قوة، عمق، وضع) على رأس خط الأنابيب الأساسي لتحسين التحكم.
 
 لإنتاج اللحوم`AUTO1111`- لا ، لا`ComfyUI`هي أدوات المجتمع؛ لخدمات الإنتاج،`diffusers`+ `accelerate`أو`optimum-nvidia`مع تجميع TensorRT.

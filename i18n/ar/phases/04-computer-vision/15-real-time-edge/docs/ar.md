@@ -1,6 +1,6 @@
 # رؤية في الوقت الحقيقي  نشر الحافة
 
-> استنتاج الحافة هو تخصص الحصول على نموذج 90 دقيقة ليتم تشغيله بسرعة 30 fps على جهاز لديه 2 جيجابايت من ذاكرة الوصول الذكي. يتم تداول كل نقطة مئوية من الدقة مقابل ملثنيات من التأخير.
+> استنتاج الحافة هو تخصص الحصول على نموذج دقيق بنسبة 90٪ ليتم تشغيله بسرعة 30 صورة في الثانية على جهاز يحتوي على 2 جيجا غابايت من ذاكرة الوصول الذكي. يتم تداول كل نقطة مئوية من الدقة مقابل ملثانية من التأخير.
 
 **Type:** Learn + Build
 **Languages:** Python
@@ -41,7 +41,7 @@ flowchart LR
     style PWR fill:#dbeafe,stroke:#2563eb
 ```
 
-- **Latency**: p50، p95، p99، متوسط p50 فقط يخفي سلوك الذيل الذي يهم للأنظمة في الوقت الحقيقي.
+- **Latency**: p50، p95، p99 الإبلاغ عن p50 فقط (أو المتوسط) يخفي سلوك الذيل الذي يهم في الأنظمة في الوقت الحقيقي.
 - **Peak memory**: أقصى ما يراه الجهاز، وليس متوسط حالة ثابتة.
 - **Power / energy**: مليليوجول لكل استنتاج على جهاز يعمل بطارية. غالباً ما يتم استغلالها بواسطة وقت استخدام CPU/GPU *.
 
@@ -270,5 +270,5 @@ def compare_regimes():
 
 - [EfficientNet (Tan & Le, 2019)](https://arxiv.org/abs/1905.11946) التوسع المركب لهياكل معمارية فعالة
 - [MobileNetV3 (Howard et al., 2019)](https://arxiv.org/abs/1905.02244) الهندسة المعمارية المتنقلة أولاً مع h-swish و squeeze-excite
-- [A Practical Guide to TensorRT Optimization (NVIDIA)](https://developer.nvidia.com/blog/accelerating-model-inference-with-tensorrt-tips-and-best-practices-for-pytorch-users/) كيفية الحصول على أرقام التدفق في الورقة
+- [Accelerating Inference Up to 6x Faster in PyTorch with Torch-TensorRT (NVIDIA)](https://developer.nvidia.com/blog/accelerating-inference-up-to-6x-faster-in-pytorch-with-torch-tensorrt/) كيفية الحصول على أرقام التدفق في الورقة
 - [ONNX Runtime docs](https://onnxruntime.ai/docs/) تعريف المعدلات، تحسين الرسم البياني، اختيار المقدمين
