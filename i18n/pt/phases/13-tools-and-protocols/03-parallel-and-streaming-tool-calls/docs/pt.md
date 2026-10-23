@@ -66,7 +66,7 @@ Cada chamada que o modelo emite tem um`id`Cada resultado que o anfitrião retorn
 
 O host executa o executor de cada chamada em seu próprio fio, coroutine ou operador remoto.`asyncio.gather`O número de identificação é o número de identificação.
 
-Um erro comum: responder com resultados na ordem da lista de chamadas em vez de ordem de conclusão.`tool_call_id`, mas se um resultado for deixado de lado ou duplicado, a submissão fora de ordem torna o depuração mais difícil.
+Um erro comum: responder com resultados na ordem da lista de chamadas em vez de ordem de conclusão.`tool_call_id`, mas se um resultado for retirado ou duplicado, uma lista de respostas que é reordenada longe da ordem em que os resultados chegaram torna a lacuna mais difícil de encontrar nos registros.
 
 ### Chamadas de ferramentas de streaming
 
@@ -158,7 +158,7 @@ Esta lição produz`outputs/skill-parallel-call-safety-check.md`. Tendo em conta
 ## Mais leitura
 
 - [OpenAI — Parallel function calling](https://platform.openai.com/docs/guides/function-calling#parallel-function-calling) comportamento padrão e a bandeira de exclusão
-- [Anthropic — Tool use: implementing tool use](https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/implementing-tool-use)- Não .`disable_parallel_tool_use`e batchagem de resultados
+- [Anthropic — Parallel tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/parallel-tool-use)- Não .`disable_parallel_tool_use`e batchagem de resultados
 - [Google — Gemini function calling parallel section](https://ai.google.dev/gemini-api/docs/function-calling)- Chamadas paralelas de Gemini 3
 - [OpenAI — Streaming responses with tools](https://platform.openai.com/docs/api-reference/responses-streaming) reassembly de argumentos em pedaços para fluxos OpenAI
 - [Anthropic — Streaming messages](https://docs.anthropic.com/en/api/messages-streaming)- Não .`content_block_delta`com`input_json_delta`
