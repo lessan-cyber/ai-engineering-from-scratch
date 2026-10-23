@@ -45,7 +45,7 @@
 
 **SECS (Speaker Encoder Cosine Similarity).**आवाज क्लोनिंग के लिए. संदर्भ और क्लोन आउटपुट के बीच ECAPA कोसिन एम्बेडिंग. &gt; 0.75 = पहचान योग्य क्लोन.
 
-**WER-on-ASR-round-trip.**TTS आउटपुट पर Whisper चलाएं, इनपुट पाठ के साथ WER गणना करें. समझदारी की गिरावट पकड़ता है. 2026 SOTA: &lt; 2% CER.
+**WER-on-ASR-round-trip.**TTS आउटपुट पर Whisper चलाएं, इनपुट पाठ के खिलाफ WER की गणना करें। समझदारी की प्रतिगमन को पकड़ता है। 2026 SOTA: अंग्रेजी परीक्षण सेट पर 2% WER (मान्डारिन सेट की बजाय CER रिपोर्ट करते हैं) ।
 
 **TTFA (time-to-first-audio).**वॉल क्लॉक लेटेन्स. कोकोरो-82एम: ~100 ms; F5-TTS: ~1 s.
 
@@ -79,7 +79,7 @@
 
 **CLAP Score.**CLAP एम्बेडेड का उपयोग करके पाठ-ऑडियो संरेखण स्कोर। &gt; 0.3 = उचित संरेखण।
 
-**Listening panel MOS.**उपभोक्ता-ग्रेड संगीत के लिए अभी भी अंतिम शब्द। TTS एरेना पर Suno v5 ELO 1293 (मानव पसंद से जोड़ी) ।
+**Listening panel MOS.**फिर भी उपभोक्ता-ग्रेड संगीत के लिए अंतिम शब्द। Suno v5 ने Suno के अपने जोड़े-प्रीफेरेंस बेंचमार्क पर ELO 1293 स्कोर किया। यह एक विक्रेता संख्या है; TTS Arena भाषण को रैंक करता है, संगीत नहीं।
 
 ### ऑडियो भाषा बेंचमार्क
 
@@ -106,7 +106,7 @@
 | Open ASR Leaderboard (HF) | English + multilingual + long-form | `huggingface.co/spaces/hf-audio/open_asr_leaderboard` |
 | TTS Arena (HF) | English TTS | `huggingface.co/spaces/TTS-AGI/TTS-Arena` |
 | Artificial Analysis Speech | TTS + STT, ELO from paired votes | `artificialanalysis.ai/speech` |
-| MMAU-Pro | LALM reasoning | `mmaubenchmark.github.io` |
+| MMAU-Pro | LALM reasoning | `sonalkum.github.io/mmau-pro` |
 | SpeakerBench / VoxSRC | Speaker recognition | `voxsrc.github.io` |
 | MMAU music subset | Music LALM | (within MMAU) |
 | HEAR benchmark | Self-supervised audio | `hearbenchmark.com` |
@@ -224,5 +224,5 @@ def eer(same_scores, diff_scores):
 - [Fréchet Audio Distance (Kilgour et al. 2019)](https://arxiv.org/abs/1812.08466) संगीत-जन मानक।
 - [Open ASR Leaderboard](https://huggingface.co/spaces/hf-audio/open_asr_leaderboard) 2026 लाइव रैंकिंग।
 - [TTS Arena](https://huggingface.co/spaces/TTS-AGI/TTS-Arena) मानव-मतों के साथ टीटीएस की रैंकिंग।
-- [MMAU-Pro benchmark](https://mmaubenchmark.github.io/) LALM तर्क तालिका।
+- [MMAU-Pro benchmark](https://sonalkum.github.io/mmau-pro/) LALM तर्क तालिका।
 - [HEAR benchmark](https://hearbenchmark.com/) ऑडियो एसएसएल बेंचमार्क।
