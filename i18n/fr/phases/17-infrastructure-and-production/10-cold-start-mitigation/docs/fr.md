@@ -1,6 +1,6 @@
 # Réduction du démarrage à froid pour les LLM sans serveur
 
-> Une image de modèle de 20 Go prend de 5 à 10 minutes (7 B) à plus de 20 minutes (70 B) pour passer du froid à la portion. Dans un monde sans serveurs, ce n'est pas un réchauffement, c'est une panne. Les atténuations fonctionnent à cinq niveaux: images de nœuds pré-sémentées (Bottlerocket sur AWS, arc à double volume), streaming de modèle (NVIDIA Run:ai Model Streamer, natif en vLLM), captures instantanées de mémoire GPU (points de contrôle modèles, redémarrage jusqu'à 10 fois plus rapide), piscines chaudes (`min_workers=1`Le module de téléchargement est un module de téléchargement de 2 à 4 fois par étage, basé sur un bassin de 5 à 10 secondes par défaut, sous-seconde avec pré-calé.
+> Un modèle grand prend quelques minutes pour passer du froid à la serveur: un modèle 70B sur un noeud frais a besoin d'environ 3 à 8 minutes avant le premier jeton. Dans un monde sans serveurs, ce n'est pas un réchauffement, c'est une panne. Les atténuations fonctionnent à cinq niveaux: images de nœuds pré-sémentées (Bottlerocket sur AWS, arc à double volume), streaming de modèle (NVIDIA Run:ai Model Streamer, natif en vLLM), captures instantanées de mémoire GPU (points de contrôle modèles, redémarrage jusqu'à 10 fois plus rapide), piscines chaudes (`min_workers=1`Le module de téléchargement est un module de téléchargement de 2 à 4 étages, basé sur un système de téléchargement de 2 à 4 étages, basé sur un système de téléchargement de 5 à 5 étages, basé sur un système de téléchargement de 2 à 5 étages.
 
 **Type:** Learn
 **Languages:** Python (stdlib, toy cold-start path simulator)
@@ -125,6 +125,6 @@ Cette leçon produit `outputs/skill-cold-start-planner.md`- étant donné la SLA
 - [Modal — Cold start performance](https://modal.com/docs/guide/cold-start) Les critères de référence et l'architecture des points de contrôle publiés par Modal.
 - [AWS Bottlerocket](https://github.com/bottlerocket-os/bottlerocket) modèle d'imagerie du volume de données pré-sémenté.
 - [NVIDIA Run:ai Model Streamer](https://github.com/run-ai/runai-model-streamer) charge de poids de chevauchement avec configuration de calcul.
-- [Baseten — Cold-start mitigation](https://www.baseten.co/blog/cold-start-mitigation/) Le manuel de préchauffement.
+- [Baseten — Cold starts](https://docs.baseten.co/deployment/autoscaling/cold-starts) Le manuel de préchauffement.
 - [ServerlessLLM paper (USENIX OSDI'24)](https://www.usenix.org/conference/osdi24/presentation/fu) conception de chargement à plusieurs niveaux.
 - [NVIDIA — Disaggregated LLM Inference on Kubernetes](https://developer.nvidia.com/blog/deploying-disaggregated-llm-inference-workloads-on-kubernetes/) migration en direct pour les déploiements décomposés.
