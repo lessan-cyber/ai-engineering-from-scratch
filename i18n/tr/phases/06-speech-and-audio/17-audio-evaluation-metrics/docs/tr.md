@@ -45,7 +45,7 @@ Her ses görevinin farklı bir ekseni ölçen birden fazla metrik vardır. Yanl�
 
 **SECS (Speaker Encoder Cosine Similarity).**Ses klonlaması için. ECAPA referans ve klon edilmiş çıkış arasında cosine yerleştirme. &gt; 0.75 = tanınabilir klon.
 
-**WER-on-ASR-round-trip.**TTS çıkışında Whisper çalıştırın, girilen metne karşı WER hesaplayın. Anlaşılabilirlik gerilemeleri yakalar. 2026 SOTA: &lt; 2% CER.
+**WER-on-ASR-round-trip.**TTS çıkışında Whisper çalıştırın, girilen metne karşı WER hesaplayın. Anlaşılabilirlik gerilemeleri yakalar. 2026 SOTA: &lt; 2% WER İngilizce test setlerinde (Mandarin setleri yerine CER rapor).
 
 **TTFA (time-to-first-audio).**Kokoro-82M: ~100 ms; F5-TTS: ~ 1 saniye.
 
@@ -79,7 +79,7 @@ Denge eksikliği: **macro F1**+ **per-class recall**.Sınıf başına rapor  Top
 
 **CLAP Score.**CLAP gömülmelerini kullanarak metin-audio uyum puanı. &gt; 0.3 = makul uyum.
 
-**Listening panel MOS.**TTS Arena'da Suno v5 ELO 1293 (insan tercihlerinden)
+**Listening panel MOS.**Suno'nun kendi çiftli tercih referanslamasında ELO 1293 puanını aldı. Bu bir satıcı numarasıdır; TTS Arena, müzik değil konuşmayı sıralamaktadır.
 
 ### Sesli dil referansları
 
@@ -106,7 +106,7 @@ Denge eksikliği: **macro F1**+ **per-class recall**.Sınıf başına rapor  Top
 | Open ASR Leaderboard (HF) | English + multilingual + long-form | `huggingface.co/spaces/hf-audio/open_asr_leaderboard` |
 | TTS Arena (HF) | English TTS | `huggingface.co/spaces/TTS-AGI/TTS-Arena` |
 | Artificial Analysis Speech | TTS + STT, ELO from paired votes | `artificialanalysis.ai/speech` |
-| MMAU-Pro | LALM reasoning | `mmaubenchmark.github.io` |
+| MMAU-Pro | LALM reasoning | `sonalkum.github.io/mmau-pro` |
 | SpeakerBench / VoxSRC | Speaker recognition | `voxsrc.github.io` |
 | MMAU music subset | Music LALM | (within MMAU) |
 | HEAR benchmark | Self-supervised audio | `hearbenchmark.com` |
@@ -224,5 +224,5 @@ Her dağıtımın her model güncelleme sırasında çalışacak sabit bir değe
 - [Fréchet Audio Distance (Kilgour et al. 2019)](https://arxiv.org/abs/1812.08466) Müzik-gen standardı.
 - [Open ASR Leaderboard](https://huggingface.co/spaces/hf-audio/open_asr_leaderboard)2026 canlı sıralamaları.
 - [TTS Arena](https://huggingface.co/spaces/TTS-AGI/TTS-Arena) İnsan oyları TTS lider listesinde.
-- [MMAU-Pro benchmark](https://mmaubenchmark.github.io/) LALM akıl yürütme lider tablosu.
+- [MMAU-Pro benchmark](https://sonalkum.github.io/mmau-pro/) LALM akıl yürütme lider tablosu.
 - [HEAR benchmark](https://hearbenchmark.com/) sesli SSL referansları.
