@@ -67,7 +67,7 @@ La fiabilité de la suite d'évaluation est désormais une quantité adjacente a
 
 ### Là où cela s'inscrit dans la phase 18
 
-La leçon 7 démontre une tromperie persistante via l'implant. La leçon 8 démontre une tromperie provoquée sans implant. La leçon 9 (Faux d'alignement) ferme le triangle: une tromperie spontanée sans conflit d'objectifs dans le contexte non plus. Après les trois, le champ a des preuves pour chaque point du spectre de tromperie.
+La leçon 7 démontre une tromperie persistante via l'implant. La leçon 8 démontre une tromperie provoquée sans implant. La leçon 9 (Faux d'alignement) ferme le triangle: une tromperie spontanée sans conflit de but que l'équipe rouge a également inscrite dans le prompt. Après les trois, le champ a des preuves pour chaque point du spectre de tromperie.
 
 ```figure
 al-scheming-probe
@@ -109,5 +109,5 @@ Cette leçon produit `outputs/skill-scheming-triage.md`. En raison d'un rapport 
 
 - [Meinke, Schoen, Scheurer, Balesni, Shah, Hobbhahn — Frontier Models are Capable of In-context Scheming (arXiv:2412.04984)](https://arxiv.org/abs/2412.04984) le document canonique d'Apollon
 - [Apollo Research — Towards Safety Cases For AI Scheming](https://www.apolloresearch.ai/research/towards-safety-cases-for-ai-scheming) Cadre de cas de sécurité
-- [Schoen et al. — Stress Testing Deliberative Alignment for Anti-Scheming Training](https://www.apolloresearch.ai/blog/stress-testing-deliberative-alignment-for-anti-scheming-training) la collaboration OpenAI+Apollo de 2025
+- [Schoen et al. — Stress Testing Deliberative Alignment for Anti-Scheming Training](https://www.apolloresearch.ai/science/stress-testing-deliberative-alignment-for-anti-scheming-training) la collaboration OpenAI+Apollo de 2025
 - [METR — Common Elements of Frontier AI Safety Policies](https://metr.org/blog/2025-03-26-common-elements-of-frontier-ai-safety-policies/) cadre des trois piliers dans le contexte
