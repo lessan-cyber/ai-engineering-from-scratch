@@ -9,7 +9,7 @@
 
 ## Mục tiêu học tập
 
-- Kết hợp 11 bài học trước đó (tokenizer, dữ liệu, đào tạo trước, quy mô, SFT, RLHF, DPO, CAI, đánh giá, định lượng, suy luận) thành một quy mô đường ống tái tạo duy nhất
+- Kết hợp mười hai bài học trước đó (hai bài học tokenizer, dữ liệu, đào tạo trước, quy mô, SFT, RLHF, DPO, CAI, đánh giá, định lượng, suy luận) thành một quy mô đường ống tái tạo duy nhất
 - Định nghĩa hợp đồng tạo vật giữa các giai đoạn: mỗi giai đoạn tiêu thụ gì, nó sản xuất gì và cách giai đoạn tiếp theo xác minh đầu vào
 - Xây dựng một trình dàn nhạc theo dõi các thí nghiệm, hash các hiện vật, và cửa đóng các quyết định trên ngưỡng đánh giá
 - Thiết kế kế kế hoạch quay lại: những đồ tạo vật nào rẻ để tái sử dụng, đắt tiền, và chi phí của một điểm kiểm soát bị hỏng
@@ -249,7 +249,7 @@ Bài học này sẽ mang lại kết quả `outputs/skill-llm-pipeline-reviewer
 | Manifest | "The recipe file" | YAML or JSON describing pipeline version, seed, per-stage config, and gate thresholds — sufficient to replay a run |
 | Content-addressed | "By hash not name" | Artifacts stored by SHA-256 of their contents, so you can never confuse version A with version B |
 | Eval gate | "The ship criteria" | Numeric thresholds on benchmark metrics and safety scores that must pass before an artifact is marked shippable |
-| KL budget | "How far alignment drifted" | A cap on cumulative KL(policy || reference) across alignment stages, enforced as a gate |
+| KL budget | "How far alignment drifted" | A cap on cumulative $\mathrm{KL}(\text{policy} \Vert \text{reference})$ across alignment stages, enforced as a gate |
 | MFU | "How much of the GPU you used" | Model FLOPs Utilization — achieved FLOPs divided by theoretical peak. 40% is typical at 70B scale, 55% at 7B |
 | Rollback plan | "What we do when it breaks" | Pre-written set of actions per stage on failure: re-run, fall back, retrain with revised inputs |
 | Orchestrator | "The conductor" | The process that reads the manifest, dispatches stages, verifies hashes, halts on any contract violation |
@@ -264,4 +264,4 @@ Bài học này sẽ mang lại kết quả `outputs/skill-llm-pipeline-reviewer
 - [Kaplan et al., 2020 -- "Scaling Laws for Neural Language Models"](https://arxiv.org/abs/2001.08361)-- mối quan hệ quy mô đầu tiên về tính toán-dữ liệu-pháp
 - [Hoffmann et al., 2022 -- "Training Compute-Optimal Large Language Models (Chinchilla)"](https://arxiv.org/abs/2203.15556)-- sự sửa đổi của Kaplan đã tái định đo ngân sách dữ liệu hiện đại
 - [PyTorch FSDP2 documentation](https://pytorch.org/docs/stable/fsdp.html)-- tập huấn phân tán nguyên thủy thay thế FSDP1 trong PyTorch 2.4+
-- [Weights & Biases LLM Reports](https://wandb.ai/site/llms)-- các biểu hiện thực và đầu ra theo dõi thí nghiệm cho các chương trình LLM nguồn mở, hữu ích như các mẫu có thể làm vở kịch
+- [Weights & Biases LLM Reports](https://wandb.ai/site/solutions/llms/)-- các biểu hiện thực và đầu ra theo dõi thí nghiệm cho các chương trình LLM nguồn mở, hữu ích như các mẫu có thể làm vở kịch
