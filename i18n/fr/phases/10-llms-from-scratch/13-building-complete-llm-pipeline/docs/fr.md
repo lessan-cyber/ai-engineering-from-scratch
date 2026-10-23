@@ -9,7 +9,7 @@
 
 ## Objectifs d'apprentissage
 
-- Composer les onze leçons précédentes (tokenizer, données, pré-formation, mise à l'échelle, SFT, RLHF, DPO, CAI, évaluation, quantification, inférence) dans une seule spécification de pipeline reproduisable
+- Composer les douze leçons précédentes (deux leçons de jeton, données, pré-formation, mise à l'échelle, SFT, RLHF, DPO, CAI, évaluation, quantification, inférence) dans une seule spécification de pipeline reproduisable
 - Définir le contrat d'artéfact entre les étapes: ce que chaque étape consomme, ce qu'elle produit et comment la phase suivante vérifie l'entrée
 - Construisez un orchestrateur qui suit les expériences, hashes des artefacts et porte les décisions de l'expédition sur les seuils d'évaluation
 - Conception du plan de réouverture: quels objets sont bon marché à réutiliser, quels sont chers et quels sont les coûts d'un poste de contrôle corrompu
@@ -249,7 +249,7 @@ Cette leçon produit `outputs/skill-llm-pipeline-reviewer.md`. Il lui donne un m
 | Manifest | "The recipe file" | YAML or JSON describing pipeline version, seed, per-stage config, and gate thresholds — sufficient to replay a run |
 | Content-addressed | "By hash not name" | Artifacts stored by SHA-256 of their contents, so you can never confuse version A with version B |
 | Eval gate | "The ship criteria" | Numeric thresholds on benchmark metrics and safety scores that must pass before an artifact is marked shippable |
-| KL budget | "How far alignment drifted" | A cap on cumulative KL(policy || reference) across alignment stages, enforced as a gate |
+| KL budget | "How far alignment drifted" | A cap on cumulative $\mathrm{KL}(\text{policy} \Vert \text{reference})$ across alignment stages, enforced as a gate |
 | MFU | "How much of the GPU you used" | Model FLOPs Utilization — achieved FLOPs divided by theoretical peak. 40% is typical at 70B scale, 55% at 7B |
 | Rollback plan | "What we do when it breaks" | Pre-written set of actions per stage on failure: re-run, fall back, retrain with revised inputs |
 | Orchestrator | "The conductor" | The process that reads the manifest, dispatches stages, verifies hashes, halts on any contract violation |
@@ -264,4 +264,4 @@ Cette leçon produit `outputs/skill-llm-pipeline-reviewer.md`. Il lui donne un m
 - [Kaplan et al., 2020 -- "Scaling Laws for Neural Language Models"](https://arxiv.org/abs/2001.08361)-- la relation d'échelle de calcul-données-paramètres d'origine
 - [Hoffmann et al., 2022 -- "Training Compute-Optimal Large Language Models (Chinchilla)"](https://arxiv.org/abs/2203.15556)-- la correction à Kaplan qui a récalibré les budgets de données modernes
 - [PyTorch FSDP2 documentation](https://pytorch.org/docs/stable/fsdp.html)-- le primitif de formation distribué remplaçant le FSDP1 dans PyTorch 2.4+
-- [Weights & Biases LLM Reports](https://wandb.ai/site/llms)-- réels manifestes et sortie de tracker d'expérience pour les cours de LLM open source, utiles comme modèles plagiatables
+- [Weights & Biases LLM Reports](https://wandb.ai/site/solutions/llms/)-- réels manifestes et sortie de tracker d'expérience pour les cours de LLM open source, utiles comme modèles plagiatables
