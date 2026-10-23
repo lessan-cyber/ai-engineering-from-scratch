@@ -1,6 +1,6 @@
 # Roteamento de modelo como uma primitiva de redução de custos
 
-> Um corretor dinâmico avalia cada solicitação (tipo de tarefa, comprimento de token, semelhança de inserção, confiança) e envia consultas simples para um modelo barato, aumentando as complexas para um modelo de fronteira. Também chamado de cascata de modelos. Os estudos de caso de produção mostram uma redução de custos de 20-60% na iso-qualidade em todas as implementações dos EUA/Reino Unido/UE; uma melhoria de eficiência de roteamento de 30% em SaaS de grande volume transforma-se em economias anuais de seis dígitos. O contexto de 2026 é que os preços de inferência LLM caíram ~ 10x por ano  um token de classe GPT-4 foi de $20/M to ~$0,40/M, de finais de 2022 a 2026. A maior parte da queda é melhor servindo pilhas (fase 17 · 04-09), não hardware. O roteamento é como você converte essa queda de preço em margem sem regressão do produto. O modo de falha é a deriva do modelo barato: a rota empurra 40% para um modelo mais fraco, a qualidade cai de 3-5% nas tarefas de raciocínio, ninguém percebe por um quarto. Roteiras de portal por métricas de qualidade online, não apenas conjuntos de avaliação offline.
+> Um corretor dinâmico avalia cada solicitação (tipo de tarefa, comprimento de token, semelhança de inserção, confiança) e envia consultas simples para um modelo barato, aumentando as complexas para um modelo de fronteira. Também chamado de cascata de modelos. Os estudos de caso de produção mostram uma redução de custos de 20-60% na iso-qualidade em todas as implementações dos EUA/Reino Unido/UE; uma melhoria de eficiência de roteamento de 30% em SaaS de grande volume transforma-se em economias anuais de seis dígitos. O contexto para 2026 é que os preços de inferência de LLM para um nível de capacidade fixo caíram cerca de 10 vezes por ano (estimativa de 16z de LLMflation); no nível GPT-4 a queda é mais lenta, de $20/M to ~$0,40/M (cerca de 50x) de finais de 2022 a 2026. A maior parte da queda é melhor servindo pilhas (fase 17 · 04-09), não hardware. O roteamento é como você converte essa queda de preço em margem sem regressão do produto. O modo de falha é a deriva do modelo barato: a rota empurra 40% para um modelo mais fraco, a qualidade cai de 3-5% nas tarefas de raciocínio, ninguém percebe por um quarto. Roteiras de portal por métricas de qualidade online, não apenas conjuntos de avaliação offline.
 
 **Type:** Learn
 **Languages:** Python (stdlib, toy cascading router simulator)
@@ -44,7 +44,7 @@ Se você encaminhar 70% para barato e 30% para caro, sua conta cai cerca de 65% 
 
 As gateways de IA (fase 17 · 19) expõem o roteamento.`router`Configurar com fallback e roteamento de custos. Portkey tem guardas + roteamento. Kong AI Gateway tem roteamento baseado em plugins.
 
-O código aberto: RouteLLM (LMSYS), Não Diamante (comercial), Prompt Mule.
+O código aberto: RouteLLM (LMSYS), Prompt Mule.
 
 ### A curva de preços de 2026
 
@@ -69,7 +69,7 @@ Roteiras de entrada por métricas de qualidade online:
 ### Números que você deve lembrar
 
 - 2026 poupança de roteamento em iso-qualidade: estudos de caso de 20 a 60%.
-- Descenso dos preços dos LLM 2022-2026: ~ 10x ao ano agregado.
+- A queda de preços da LLM num nível de capacidade fixo: ~10x por ano (estimativa de 16z da LLMflation); cerca de 50x total no nível GPT-4 de 2022 a 2026.
 - Nível GPT-4 2022 vs 2026: ~$20/M → ~$0,40/M.
 - Impacto de latência em cascata: ~ 1,2x média, ~ 2x escalada (~ 10% do tráfego).
 
@@ -109,7 +109,7 @@ Esta lição produz`outputs/skill-router-plan.md`- Tendo em conta a carga de tra
 
 ## Mais leitura
 
-- [AbhyashSuchi — Model Routing LLM 2026 Best Practices](https://abhyashsuchi.in/model-routing-llm-2026-best-practices/)
+- [AbhyashSuchi — Model Routing LLM 2026 Best Practices](https://web.archive.org/web/20260413143335/https://abhyashsuchi.in/model-routing-llm-2026-best-practices/)
 - [Lukas Brunner — Rise of Inference Optimization 2026](https://dev.to/lukas_brunner/the-rise-of-inference-optimization-the-real-llm-infra-trend-shaping-2026-4e4o)
 - [RouteLLM paper / code](https://github.com/lm-sys/RouteLLM)
 - [Not Diamond — model routing](https://www.notdiamond.ai/)

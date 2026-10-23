@@ -11,8 +11,8 @@
 
 - Explique PagedAttention como um alocador de cache de KV: blocos, tabelas de blocos e por que a fragmentação permanece abaixo de 4% na carga de produção.
 - Diagrama de batches contínuos no nível de iteração: como as sequências acabadas deixam o lote e as novas se juntam sem drenar.
-- Descreva preenchimento em pedaços numa frase e nomear qual métrica de latência protege (indicação: é cauda TTFT, não significa transferência).
-- Nomear o 2026 vLLM v0.18.0 gotcha que morde equipes possibilitando toda otimização de uma só vez.
+- Descreva o preenchimento em pedaços numa frase e nomear qual métrica de latência protege (indicação: é a cauda ITL de decodificadores simultâneos, não o volume de transmissão).
+- Verifique uma combinação de recursos vLLM contra a matriz de compatibilidade para a sua versão antes de habilitar todas as otimizações de uma só vez.
 
 ## O problema
 
@@ -44,7 +44,7 @@ A batchagem contínua opera entre cada etapa de decodificação.`RUNNING`Em cada
 
 O tamanho do lote nunca é empolhado para um número fixo. Sequências em diferentes posições em sua saída compartilham um fundido para a frente.`V1 scheduler`. A invariante chave: o programador é executado uma vez por iteração de decodificação, não uma vez por solicitação.
 
-### Preenchimento em pedaços protege a cauda TTFT
+### Preenchimento em pedaços protege a cauda do ITL
 
 O prefill é computacional. Um prompt de 32k-token no Llama 3.3 70B leva ~800 ms de prefill puro em um H100. Enquanto prefill executa, decodifica tokens para cada outra sequência na bateria de espera. Em um loop de serviço, a latença de primeiro token (TTFT) de um longo prompt se torna o blip de latença inter-token (ITL) para dezenas de outros usuários.
 
@@ -56,9 +56,9 @@ As três características assumem-se mutuamente. PagedAttention dá ao cronista 
 
 Não é preciso conhecer todas as bandeiras, é preciso saber o que o programador otimiza: um bom rendimento sob o orçamento do bloco KV, sujeito a cortes de pré-enchimento em pedaços.
 
-### O 2026 v0.18.0 tem-te
+### Verifique a matriz de compatibilidade
 
-Em vLLM v0.18.0 não pode combinar `--enable-chunked-prefill`com decodificação especulativa de modelo de projecto (`--speculative-model`)). A exceção documentada é a descodificação especulativa da GPU de N-gram no cronógrafo V1. As equipes que deslizam todas as bandeiras sem ler as notas de lançamento recebem um erro no tempo de execução no início, não uma regressão suave. Se o seu ganho especulativo valeria a pena permitir preenchimento em pedaços, revisite a escolha  a resposta correta em 2026 é muitas vezes EAGLE-3 sem preenchimento em pedaços, não um modelo de projeto mais preenchimento em pedaços que não compila.
+Verifique cada combinação de recursos contra a matriz de compatibilidade para a sua versão exacta de vLLM antes de ativá-los todos de uma só vez, porque o que compõe muda entre as versões. Na versão 0.18.0, a matriz de recursos marca a descodificação especulativa como compatível com o preenchimento em pedaços e o caching de prefixos, e a página de descodificação especulativa lista duas incompatibilidades conhecidas: paralelismo de pipeline através da versão 0.15.0, e especulação de modelo de projeto através da versão 0.10.0. Para o próprio projecto de método, a definição padrão para 2026 é frequentemente EAGLE-3 (`"method": "eagle3"`), abrangida pela fase 17 · 05.
 
 ### Números que você deve lembrar
 
@@ -130,8 +130,8 @@ Esta lição produz`outputs/skill-vllm-scheduler-reader.md`. Dada uma configura�
 | Chunked prefill | "prefill splitting" | Break long prefill into 512-token slices interleaved with decode |
 | TTFT | "first token time" | Prefill + queue + network; dominated by prefill at long prompts |
 | ITL | "inter-token latency" | Time between consecutive decode tokens; dominated by batch size |
-| Goodput | "throughput that meets SLO" | Tokens/sec where every request still hit TTFT and ITL targets |
-| V1 scheduler | "the new scheduler" | vLLM's 2026 scheduler; N-gram spec decode is the chunked-prefill-compatible path |
+| Goodput | "throughput that meets SLO" | Requests/sec that still hit TTFT and ITL targets (Phase 17 · 08 reports it as the share of requests) |
+| V1 scheduler | "the new scheduler" | vLLM's 2026 scheduler; runs continuous batching with chunked prefill |
 | `--gpu-memory-utilization` | "the memory knob" | Fraction of HBM reserved for KV blocks after weights and activations |
 
 ## Mais leitura

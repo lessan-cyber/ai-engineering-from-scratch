@@ -77,7 +77,7 @@ Se a pilha precisar de ser redistribuída para o rollback, corrija-a antes de ro
 
 ### Cadência de métricas
 
-Canary gates verifica a cada 5-15 minutos dependendo do volume de tráfego. 1% do tráfego com 10 req / min dá 50-150 pontos de dados por janela  suficiente para latência, mas barulhento para o feedback do usuário. 10% dá ~ 10x mais.
+Canary gates verifica a cada 5-15 minutos dependendo do volume de tráfego. 1% de 1.000 req/min (10 req/min para o canário) dá 50-150 pontos de dados por janela de 5-15 minutos  suficiente para latência, mas barulhento para o feedback do usuário. 10% dá ~ 10x mais.
 
 ### O passo A/B é opcional
 

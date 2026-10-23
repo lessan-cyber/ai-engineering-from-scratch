@@ -1,6 +1,6 @@
 # Mitigação do início no frio para LLM sem servidor
 
-> Uma imagem de modelo de 20 GB leva 5-10 minutos (7B) a 20+ minutos (70B) para passar de frio para servir. Num mundo sem servidores, isso não é um aquecimento, é uma interrupção. As mitigações operam em cinco camadas: imagens pré-seed nodes (Bottlerocket na AWS, arco de duplo volume), streaming de modelo (NVIDIA Run:ai Model Streamer, nativo no vLLM), instantâneos de memória da GPU (punto de verificação Modal, até 10 vezes mais rápido reinicialização), pools quentes (`min_workers=1`O Modal publica 2-4s de início frio como um piso; Baseten 5-10s padrão, subsegundo com pré-aquecimento. Esta lição ensina a medir, orçar e empilhar as cinco camadas.
+> Um modelo grande leva minutos para passar do frio para a servida: um modelo 70B em um nó fresco precisa de aproximadamente 3-8 minutos antes do primeiro token. Num mundo sem servidores, isso não é um aquecimento, é uma interrupção. As mitigações operam em cinco camadas: imagens pré-seed nodes (Bottlerocket na AWS, arco de duplo volume), streaming de modelo (NVIDIA Run:ai Model Streamer, nativo no vLLM), instantâneos de memória da GPU (punto de verificação Modal, até 10 vezes mais rápido reinicialização), pools quentes (`min_workers=1`O Modal publica 2-4s de início frio como um piso; Baseten 5-10s padrão, subsegundo com pré-aquecimento. Esta lição ensina a medir, orçar e empilhar as cinco camadas.
 
 **Type:** Learn
 **Languages:** Python (stdlib, toy cold-start path simulator)
@@ -125,6 +125,6 @@ Esta lição produz`outputs/skill-cold-start-planner.md`- Tendo em conta o SLA, 
 - [Modal — Cold start performance](https://modal.com/docs/guide/cold-start) Os valores de referência e a arquitetura dos pontos de controlo publicados pela Modal.
 - [AWS Bottlerocket](https://github.com/bottlerocket-os/bottlerocket) padrão de imagem de volume de dados pré-seeded.
 - [NVIDIA Run:ai Model Streamer](https://github.com/run-ai/runai-model-streamer) Pesos de sobreposição de carga com configuração de cálculo.
-- [Baseten — Cold-start mitigation](https://www.baseten.co/blog/cold-start-mitigation/) Manual de jogo de pré- aquecimento.
+- [Baseten — Cold starts](https://docs.baseten.co/deployment/autoscaling/cold-starts) Manual de jogo de pré- aquecimento.
 - [ServerlessLLM paper (USENIX OSDI'24)](https://www.usenix.org/conference/osdi24/presentation/fu) Projeto de carga em camadas.
 - [NVIDIA — Disaggregated LLM Inference on Kubernetes](https://developer.nvidia.com/blog/deploying-disaggregated-llm-inference-workloads-on-kubernetes/) migração ao vivo para as instalações desagregadas.
