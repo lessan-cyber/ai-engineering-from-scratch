@@ -87,7 +87,7 @@ O arame não assume que a confiança venha de softmax.`[0, 1]`Para tarefas de m�
 
 - Todas as previsões erradas: ECE é a confiança média, Brier é alta, perplexidade é o que o modelo pensa do texto.
 - Todas as previsões corretas com alta confiança: ECE perto de zero, Brier perto de zero.
-- Preditor perfeitamente incerto em p = 0,5: ECE é 0,5 menos precisão, Brier é 0,25 menos um termo de correção.
+- Preditor perfeitamente incerto em p = 0,5: cada previsão cai em um lixo, então ECE é `|0.5 - accuracy|`O Brier é exactamente 0,25, porque`(0.5 - y)^2 = 0.25`se `y`é 0 ou 1.
 - Entrada em branco: ECE, Brier e retorno de confiabilidade `0.0`(ou matrizes com zero) Retorna perplexidade `NaN`Para o caso de tokens zero, nenhum desses caminhos emite um aviso; o corredor inspeciona os valores e decide se deve relatar ou saltar.
 
 Um modelo real com um ponto de referência real não vai bater-lhes, mas um adaptador de buggy ou uma pequena amostra vai, e o corredor não deve acertar.
