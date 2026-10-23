@@ -1,6 +1,6 @@
 # Khử hiệu ứng bắt đầu lạnh cho LLM không có máy chủ
 
-> Một hình ảnh mô hình 20 GB mất 5-10 phút (7B) đến 20+ phút (70B) để chuyển từ lạnh đến phục vụ. Trong một thế giới không có máy chủ thực sự, đó không phải là một sự nóng lên  đó là một sự gián đoạn. Các giảm hoạt động ở năm lớp: hình ảnh nút được gieo trước (Bottlerocket trên AWS, vòm hai khối), dòng dòng dòng (NVIDIA Run:ai Model Streamer, bản địa trong vLLM), chụp ảnh chụp trong bộ nhớ GPU (Mô-định kiểm tra, khởi động lại nhanh hơn 10 lần), hồ bơi ấm (`min_workers=1`), tải cấp (ServerlessLLM NVMe→DRAM→HBM đường ống dẫn, giảm độ trễ 10-200x), và di chuyển trực tiếp di chuyển các token đầu vào (KB) thay vì bộ nhớ cache KV (GB). Modal xuất bản 2-4s lạnh bắt đầu như một tầng; Baseten 5-10s mặc định, dưới giây với trước khi nóng lên. Bài học này dạy bạn để đo, ngân sách và xếp chồng năm tầng.
+> Một mô hình lớn mất vài phút để đi từ lạnh đến phục vụ: một mô hình 70B trên một nút tươi cần khoảng 3-8 phút trước khi token đầu tiên. Trong một thế giới không có máy chủ thực sự, đó không phải là một sự nóng lên  đó là một sự gián đoạn. Các giảm hoạt động ở năm lớp: hình ảnh nút được gieo trước (Bottlerocket trên AWS, vòm hai khối), dòng dòng dòng (NVIDIA Run:ai Model Streamer, bản địa trong vLLM), chụp ảnh chụp trong bộ nhớ GPU (Mô-định kiểm tra, khởi động lại nhanh hơn 10 lần), hồ bơi ấm (`min_workers=1`), tải cấp (ServerlessLLM NVMe→DRAM→HBM đường ống dẫn, giảm độ trễ 10-200x), cộng với mô hình thứ sáu bổ sung, di chuyển trực tiếp di chuyển các token đầu vào (KB) thay vì bộ nhớ cache KV (GB). Modal xuất bản 2-4s bắt đầu lạnh như một tầng; Baseten 5-10s mặc định, dưới giây với trước khi nóng lên. Bài học này dạy bạn đo, ngân sách và xếp chồng năm tầng.
 
 **Type:** Learn
 **Languages:** Python (stdlib, toy cold-start path simulator)
@@ -125,6 +125,6 @@ Bài học này sẽ mang lại kết quả `outputs/skill-cold-start-planner.md
 - [Modal — Cold start performance](https://modal.com/docs/guide/cold-start) Các tiêu chuẩn và kiến trúc điểm kiểm soát được công bố của Modal.
 - [AWS Bottlerocket](https://github.com/bottlerocket-os/bottlerocket) mô hình chụp ảnh nhanh về khối lượng dữ liệu được gieo trước.
 - [NVIDIA Run:ai Model Streamer](https://github.com/run-ai/runai-model-streamer) tải trọng chồng chéo với thiết lập tính toán.
-- [Baseten — Cold-start mitigation](https://www.baseten.co/blog/cold-start-mitigation/) Quyển sách trước khi nóng lên.
+- [Baseten — Cold starts](https://docs.baseten.co/deployment/autoscaling/cold-starts) Quyển sách trước khi nóng lên.
 - [ServerlessLLM paper (USENIX OSDI'24)](https://www.usenix.org/conference/osdi24/presentation/fu) Thiết kế tải hàng cấp.
 - [NVIDIA — Disaggregated LLM Inference on Kubernetes](https://developer.nvidia.com/blog/deploying-disaggregated-llm-inference-workloads-on-kubernetes/) di cư trực tiếp cho các triển khai phân chia.
