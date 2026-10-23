@@ -46,7 +46,7 @@ Viola el orden  poner el mensaje del usuario por encima del aviso del sistema, i
 
 ### El cálculo del equilibrio
 
-El 25% de la prima de escritura de Anthropic significa que un bloque almacenado en caché debe leerse al menos dos veces para ahorrar dinero neto. 1 escribir + 1 leer promedio de 0.675x costo por solicitud (ahorra 32%); 1 escribir + 10 leer promedio de 0.205x (ahorra 80%). regla general: almacenar en caché cualquier cosa que espera reutilizar al menos 3 veces dentro del TTL.
+La prima de escritura del 25% de Anthropic (5 minutos TTL) se paga por sí misma en la primera lectura, porque una lectura de caché cuesta 0.1x. 1 escriba + 1 lee promedio de 0,675x costo por solicitud (ahorra 32%); 1 escriba + 10 lee promedio de 0,205x (ahorra 80%). El TTL de 1 hora cobra 2x por la escritura, por lo que ese bloque necesita dos lecturas para salir adelante. Regla de oro: almacenar en caché cualquier cosa que espera reutilizar al menos 3 veces dentro del TTL; que elimina el equilibrio en cualquiera de los TTL.
 
 ```figure
 prompt-cache-hit
@@ -141,7 +141,7 @@ from google.genai import types
 client = genai.Client()
 
 cache = client.caches.create(
-    model="gemini-3-pro",
+    model="gemini-3.8-flash",
     config=types.CreateCachedContentConfig(
         display_name="rubric-v3",
         system_instruction=RUBRIC,
@@ -151,7 +151,7 @@ cache = client.caches.create(
 )
 
 resp = client.models.generate_content(
-    model="gemini-3-pro",
+    model="gemini-3.8-flash",
     contents=["Review this code:\n" + code],
     config=types.GenerateContentConfig(cached_content=cache.name),
 )
