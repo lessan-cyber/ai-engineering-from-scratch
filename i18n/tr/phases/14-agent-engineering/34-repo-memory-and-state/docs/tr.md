@@ -95,7 +95,7 @@ Dört örnektir ders minimumunu bir çok ajanlı monorepo hayatta kalabilecek bi
 
 **Separate large artifacts from state.**CSV'leri, uzun transkriptleri veya oluşturulan dosyaları saklama `agent_state.json`. Eserleri ayrı bir dosya olarak kaydet (veya nesne depolama alanına yükle) ve sadece yolun durumunda tut. Kontrol noktaları küçük ve hızlı kalır; eserler bağımsız olarak büyür.
 
-**Event sourcing for audit, snapshots for resume.**Bir olay günlüğüne ekle (`state.events.jsonl`) her mutasyonda; düzenli olarak `state.json`Resume anlık görüntüyü okuyor, ardından anlık görüntünün zaman damgasından sonra olan her olayı yeniden oynar. Bu daha fazla disk maliyetini alır, ancak uzun ufuk çalışmalar düzeltirken ajan kararlarını sözcük anlamda tekrar oynamalarını sağlar. Postgres'in WAL için içsel olarak kullandığı aynı şekil.
+**Event sourcing for audit, snapshots for resume.**Bir olay günlüğüne ekle (`state.events.jsonl`) her mutasyonda; düzenli olarak `state.json`Resume anlık görüntüyü okuyor, ardından anlık görüntünün zaman damgasından sonra gerçekleşen olayları yeniden oynatır. Bu daha fazla disk maliyetini alır, ancak uzun ufuklu çalışmalar düzeltirken ajan kararlarını sözcük anlamda tekrar oynamalarını sağlar. Postgres, uygulama olaylarından çok daha düşük seviyede olsa da, depolama katmanında aynı günlük artı kontrol noktası fikrini kullanır.
 
 **Schema migrations or refuse to load.**- Evet .`schema_version`tam sayı sözleşmedir. yöneticisi bir dosyayı bilinmeyen bir sürümde yüklerken, okumaktan kaçınır. Şema yumruğunun yanında bir göç metni gönderin; `tools/migrate_state.py`Her başlangıçta idempotently çalışır.
 
@@ -133,7 +133,7 @@ Dört örnektir ders minimumunu bir çok ajanlı monorepo hayatta kalabilecek bi
 
 - [JSON Schema specification](https://json-schema.org/specification.html)
 - [LangGraph checkpointers](https://langchain-ai.github.io/langgraph/concepts/persistence/)
-- [Letta memory blocks](https://docs.letta.com/concepts/memory)
+- [Letta memory blocks](https://docs.letta.com/v1-sdk/memory/memory-blocks)
 - [Fast.io, AI Agent State Checkpointing: A Practical Guide](https://fast.io/resources/ai-agent-state-checkpointing/) İdempotency ile ilk şema kontrol noktası
 - [Fast.io, AI Agent Workflow State Persistence: Best Practices 2026](https://fast.io/resources/ai-agent-workflow-state-persistence/) Eşzamanlılık kontrolü, TTL, olay kaynakları
 - [Hive Issue #6263 — non-atomic state.json writes silently ignored](https://github.com/aden-hive/hive/issues/6263) Gerçek bir projede başarısızlık modu
