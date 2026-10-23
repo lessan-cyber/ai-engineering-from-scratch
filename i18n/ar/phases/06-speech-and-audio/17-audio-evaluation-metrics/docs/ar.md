@@ -45,7 +45,7 @@
 
 **SECS (Speaker Encoder Cosine Similarity).**للتنسيق الصوتي. إيكابا تضمين كوسين بين الإشارة والإنتاج المنسق. &gt; 0.75 = نسخة قابلة للتعرف.
 
-**WER-on-ASR-round-trip.**تشغيل Whisper على إصدار TTS، حساب WER ضد النص المدخل. يلتقط تراجعات التفاهم. 2026 SOTA: &lt; 2% CER.
+**WER-on-ASR-round-trip.**تشغيل Whisper على إصدار TTS ، وحساب WER ضد نص المدخل. يلتقط تراجعات التفاهم. 2026 SOTA: &lt; 2% WER على مجموعات اختبار الإنجليزية (مجموعات الماندرين تقرير CER بدلاً من ذلك).
 
 **TTFA (time-to-first-audio).**تأخير الساعة الجدارية كوكورو-82م: ~100 ms F5-TTS: ~1 ثانية
 
@@ -79,7 +79,7 @@
 
 **CLAP Score.**درجة التنظيم النصي-الصوتي باستخدام إدمجات CLAP. &gt; 0.3 = التنظيم المعقول.
 
-**Listening panel MOS.**لا يزال الكلمة الأخيرة للموسيقى المستهلكة. سونو v5 ELO 1293 على TTS Arena (من تفضيلات الإنسان المزدوجة).
+**Listening panel MOS.**لا يزال الكلمة الأخيرة للموسيقى المستهلكة. حصلت Suno v5 على ELO 1293 على مقياس التفضيلات المزدوجة الخاص بـ Suno. هذا رقم البائع؛ تحدّث TTS Arena عن الكلام، وليس الموسيقى.
 
 ### معايير اللغة الصوتية
 
@@ -106,7 +106,7 @@
 | Open ASR Leaderboard (HF) | English + multilingual + long-form | `huggingface.co/spaces/hf-audio/open_asr_leaderboard` |
 | TTS Arena (HF) | English TTS | `huggingface.co/spaces/TTS-AGI/TTS-Arena` |
 | Artificial Analysis Speech | TTS + STT, ELO from paired votes | `artificialanalysis.ai/speech` |
-| MMAU-Pro | LALM reasoning | `mmaubenchmark.github.io` |
+| MMAU-Pro | LALM reasoning | `sonalkum.github.io/mmau-pro` |
 | SpeakerBench / VoxSRC | Speaker recognition | `voxsrc.github.io` |
 | MMAU music subset | Music LALM | (within MMAU) |
 | HEAR benchmark | Self-supervised audio | `hearbenchmark.com` |
@@ -224,5 +224,5 @@ def eer(same_scores, diff_scores):
 - [Fréchet Audio Distance (Kilgour et al. 2019)](https://arxiv.org/abs/1812.08466) معيار الموسيقى
 - [Open ASR Leaderboard](https://huggingface.co/spaces/hf-audio/open_asr_leaderboard) 2026 ترتيبات حية.
 - [TTS Arena](https://huggingface.co/spaces/TTS-AGI/TTS-Arena) قائمة التصويت البشري في TTS
-- [MMAU-Pro benchmark](https://mmaubenchmark.github.io/) قائمة التفكير LALM
+- [MMAU-Pro benchmark](https://sonalkum.github.io/mmau-pro/) قائمة التفكير LALM
 - [HEAR benchmark](https://hearbenchmark.com/) أداء النصوص الخاصة بـ SSL
