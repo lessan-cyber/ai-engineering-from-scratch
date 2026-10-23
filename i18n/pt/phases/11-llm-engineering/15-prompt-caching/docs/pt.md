@@ -46,7 +46,7 @@ Viola a ordem  colocar a mensagem do usuário acima do prompt do sistema, interr
 
 ### O cálculo do equilíbrio
 
-O prémio de escrita de 25% da Anthropic significa que um bloco em cache deve ser lido pelo menos duas vezes para economizar dinheiro líquido. 1 escrever + 1 ler média 0,675x custo por solicitação (salva 32%); 1 escrever + 10 ler média 0,205x (salva 80%). Regra de ouro: cache qualquer coisa que você espera reutilizar pelo menos 3 vezes dentro do TTL.
+O prêmio de escrita de 25% da Anthropic (5 minutos de TTL) paga por si mesmo na primeira leitura, porque uma leitura cache custa 0,1x. 1 escrita + 1 leitura média 0,675x custo por pedido (salva 32%); 1 escrita + 10 leituras médias 0,205x (salva 80%). O TTL de 1 hora cobra 2x para a escrita, então esse bloco precisa de duas leituras para sair à frente. Regra geral: cache qualquer coisa que você espera reutilizar pelo menos 3 vezes dentro do TTL; que limpa o equilíbrio em qualquer TTL.
 
 ```figure
 prompt-cache-hit
@@ -141,7 +141,7 @@ from google.genai import types
 client = genai.Client()
 
 cache = client.caches.create(
-    model="gemini-3-pro",
+    model="gemini-3.8-flash",
     config=types.CreateCachedContentConfig(
         display_name="rubric-v3",
         system_instruction=RUBRIC,
@@ -151,7 +151,7 @@ cache = client.caches.create(
 )
 
 resp = client.models.generate_content(
-    model="gemini-3-pro",
+    model="gemini-3.8-flash",
     contents=["Review this code:\n" + code],
     config=types.GenerateContentConfig(cached_content=cache.name),
 )
