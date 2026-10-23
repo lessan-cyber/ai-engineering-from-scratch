@@ -1,6 +1,6 @@
 # Gerçek Zaman Görüşü  Kısıtlama
 
-> Kenar çıkarım, 90 doğruluklu bir modelin 2 GB RAM'li bir cihazda 30 fps hızında çalışmasını sağlamak için disiplindir.
+> Kenar çıkarım, %90 doğruluklı bir modelin 2 GB RAM'li bir cihazda 30 fps hızında çalışmasını sağlayan disiplindir.
 
 **Type:** Learn + Build
 **Languages:** Python
@@ -41,7 +41,7 @@ flowchart LR
     style PWR fill:#dbeafe,stroke:#2563eb
 ```
 
-- **Latency**Ortalama sadece p50'de gerçek zamanlı sistemler için önemli olan kuyruğu davranışları gizlenir.
+- **Latency**Sadece p50 (veya ortalama) raporlama gerçek zamanlı sistemler için önemli olan kuyruğu davranışları gizler.
 - **Peak memory**Bu, cihazın gördüğü maksimum, sabit durum ortalaması değil.
 - **Power / energy**Batarya ile çalışan bir cihazda: her sonuca göre millijoules.
 
@@ -270,5 +270,5 @@ Bu ders şunları ortaya çıkarır:
 
 - [EfficientNet (Tan & Le, 2019)](https://arxiv.org/abs/1905.11946) verimli mimariler için bileşik ölçeklendirme
 - [MobileNetV3 (Howard et al., 2019)](https://arxiv.org/abs/1905.02244) H-swish ve squeeze-excite ile mobil ilk mimarisi
-- [A Practical Guide to TensorRT Optimization (NVIDIA)](https://developer.nvidia.com/blog/accelerating-model-inference-with-tensorrt-tips-and-best-practices-for-pytorch-users/) Kağıtdaki geçiş sayısını nasıl elde edebilirsiniz
+- [Accelerating Inference Up to 6x Faster in PyTorch with Torch-TensorRT (NVIDIA)](https://developer.nvidia.com/blog/accelerating-inference-up-to-6x-faster-in-pytorch-with-torch-tensorrt/) Kağıtdaki geçiş sayısını nasıl elde edebilirsiniz
 - [ONNX Runtime docs](https://onnxruntime.ai/docs/) Kvantisaj, grafik optimizasyonu, tedarikçi seçimi

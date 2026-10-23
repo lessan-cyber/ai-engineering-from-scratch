@@ -55,8 +55,8 @@ flowchart LR
 
 Basit metin koşullandırması öğrenir `epsilon_theta(x_t, t, c)`Her çağrısı için .`c`CFG aynı ağı `c`Bu nedenle, bu durumun sonucunda, hem koşullu hem de koşulsuz gürültüyi tahmin eden tek bir model oluşturuldu.
 
-```
-eps = eps_uncond + w * (eps_cond - eps_uncond)
+```math
+\epsilon = \epsilon_{\text{uncond}} + w \cdot (\epsilon_{\text{cond}} - \epsilon_{\text{uncond}})
 ```
 
 `w`- Bu yönlendirme ölçeği.`w=0`Şartsızdır.`w=1`- Kesinlikle şartlı.`w>1`SD standart olarak `w=7.5`- Evet .
@@ -193,13 +193,16 @@ Maskedeki beyaz pikseller yenilenmek için alan.
 ### Adım 5: LoRA yükleme
 
 ```python
-pipe.load_lora_weights("sayakpaul/sd-lora-ghibli")
+pipe.load_lora_weights(
+    "artificialguybr/studioghibli-redmond-1-5v-studio-ghibli-lora-for-liberteredmond-sd-1-5",
+    weight_name="StudioGhibliRedmond-15V-LiberteRedmond-StdGBRedmAF-StudioGhibli.safetensors",
+)
 pipe.fuse_lora(lora_scale=0.8)
 
-image = pipe(prompt="a village square in ghibli style").images[0]
+image = pipe(prompt="a village square, StdGBRedmAF, Studio Ghibli").images[0]
 ```
 
-`lora_scale`Güç kontrolü; 0.0 = hiçbir etki, 1.0 = tam etki. `fuse_lora`Adaptörü hız için yerindeki ağırlıklara pişirir ama değişimi engeller.`pipe.unfuse_lora()`Farklı bir adaptör yüklenmeden önce.
+Modeldeki tetikleyici cümle (`StdGBRedmAF, Studio Ghibli`) stilini açar. `lora_scale`Güç kontrolü; 0.0 = hiçbir etki, 1.0 = tam etki. `fuse_lora`Adaptörü hız için yerindeki ağırlıklara pişirir ama değişimi engeller.`pipe.unfuse_lora()`Farklı bir adaptör yüklenmeden önce.
 
 ### Adım 6: LoRA eğitimi (sketç)
 
@@ -232,7 +235,7 @@ Sadece LoRA matrisleri gradient alır; temel U-Net, VAE ve metin kodlayıcı don
 
 - **Model family**: SD 1.5 açık kaynaklı topluluk ince tonları için, SDXL daha yüksek sadakat için, SD3 / FLUX son teknoloji ve sıkı lisans gereksinimleri için.
 - **Scheduler**: DPM-Solver++ 20 ila 30 adım için 2M Karras, 1 saniye altında geciktiğinde LCM-LoRA.
-- **Precision**- Evet .`float16`4080/4090'da, `bfloat16`A100 ve daha yeni,`int8`(den)`bitsandbytes`veya `compel`) VRAM sıkıken.
+- **Precision**- Evet .`float16`4080/4090'da, `bfloat16`A100 ve daha yeni,`int8`(den)`bitsandbytes`) VRAM sıkıken.
 - **Conditioning**: düz metin çalışması; daha güçlü kontrol için, temel boru hattının üstüne ControlNet (sıkı, derin, poz) ekleyin.
 
 Satır üretimi için,`AUTO1111`- Ne ?`ComfyUI`Topluluk araçları; üretim API'leri için,`diffusers`+ `accelerate`veya `optimum-nvidia`TensorRT komisyonu ile.
